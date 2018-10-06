@@ -1,5 +1,5 @@
 const express = require('express');
-const helloRoute = require('./routes/hello');
+const phrasesRoute = require('./routes/phrasesRoute');
 const hostname = 'localhost';
 const port = 3000;
 const app = new express();
@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static('dist'));
-app.use('/hello', helloRoute);
+app.use('/phrases', phrasesRoute);
 
 app.listen(3000, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
