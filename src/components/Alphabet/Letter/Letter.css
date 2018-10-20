@@ -1,0 +1,10 @@
+.letter {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    color: #dedede;
+    font-size: 30px;
+    margin: 10px;
+    cursor: pointer;
+}

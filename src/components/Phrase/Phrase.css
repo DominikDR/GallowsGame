@@ -1,0 +1,13 @@
+.category {
+    color: #ffdddd;
+    font-size: 20px;
+    text-align: center;
+    margin: 8px;
+}
+
+.phrase {
+    color: #ffdddd;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 5px;
+}

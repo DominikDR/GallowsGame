@@ -1,10 +1,7 @@
-.mainPage {
-    background-color: #eeeeee;
+:global(body) {
+    margin: 0;
 }
-
-.welcome {
-    text-align: center;
-    font-size: 30px;
-    width: 100%;
-    background: #99c2ff;
+.mainPage {
+    min-height: 100vh;
+    background-color: #333333;
 }
