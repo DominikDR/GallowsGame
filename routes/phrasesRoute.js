@@ -7,7 +7,7 @@ const routes = express.Router();
 
 const gameState = {};
 let counterID = 0;
-const gameStateKeys = ["id", "category", "failsCounter", "encodedPhrase"];
+const gameStateKeys = ["id", "category", "failsCounter", "encodedPhrase", "endState"];
 
 const createNewGame = () => {
     let incrementedID = counterID++;
@@ -19,6 +19,7 @@ const createNewGame = () => {
         phrase: newPhrase.phrase,
         failsCounter: 0,
         encodedPhrase: encryptPhrase(newPhrase.phrase),
+        endState: null,
     }
     return gameState[incrementedID];
 }
@@ -51,7 +52,7 @@ routes.get('/new', (req, res) => {
     res.send(reducedNewGame);
 });
 
-const  revealLetterInPhrase = (fullPhrase, partPhrase, letter) => {
+const revealLetterInPhrase = (fullPhrase, partPhrase, letter) => {
     const phraseSplitted = fullPhrase.split('');
     const partPhraseSplitted = partPhrase.split('');
     console.log("partPhrase", partPhrase)
@@ -73,15 +74,19 @@ routes.post('/check', (req, res) => {
             // fn revealLetterInPhrase receive two parameters, full phrase, part phrase and letter. FN have to return string only with revealed letters.
             //Here in if we have to replace gameState with above newPhrase and return it.
             const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.query.letter);
-            gameState[req.query.id].encodedPhrase = revealedPhrase;
-            gameStateForClient = pick(gameState[req.query.id], gameStateKeys)
+            gameStatus.encodedPhrase = revealedPhrase;
+            if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = 1;
+
+            gameStateForClient = pick(gameStatus, gameStateKeys);
             console.log("dupadupa", gameState);
             res.send(gameStateForClient);
             return;
         } else {
             //else return gameState only with changed failsCounter.
-            ++gameState[req.query.id].failsCounter;
-            gameStateForClient = pick(gameState[req.query.id], gameStateKeys)
+            ++gameStatus.failsCounter;
+            if (gameStatus.failsCounter === 6) gameStatus.endState = 0;
+
+            gameStateForClient = pick(gameStatus, gameStateKeys);
             console.log("dupadupa2", gameState);
             res.send(gameStateForClient);
         }
