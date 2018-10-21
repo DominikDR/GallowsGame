@@ -7,6 +7,7 @@ const routes = express.Router();
 
 const gameState = {};
 let counterID = 0;
+const gameStateKeys = ["id", "category", "failsCounter", "encodedPhrase"];
 
 const createNewGame = () => {
     let incrementedID = counterID++;
@@ -45,7 +46,7 @@ const encryptPhrase = (phrase) => {
 
 routes.get('/new', (req, res) => {
     const newGame = createNewGame();
-    const reducedNewGame = pick(newGame, ["id", "category", "failsCounter", "encodedPhrase"]);
+    const reducedNewGame = pick(newGame, gameStateKeys);
     console.log("newGame", reducedNewGame);
     res.send(reducedNewGame);
 });
@@ -66,20 +67,23 @@ const  revealLetterInPhrase = (fullPhrase, partPhrase, letter) => {
 
 routes.post('/check', (req, res) => {
     const gameStatus = gameState[req.query.id];
+    let gameStateForClient;
     if (gameStatus) {
         if (gameStatus.phrase.includes(req.query.letter)) {
             // fn revealLetterInPhrase receive two parameters, full phrase, part phrase and letter. FN have to return string only with revealed letters.
             //Here in if we have to replace gameState with above newPhrase and return it.
             const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.query.letter);
             gameState[req.query.id].encodedPhrase = revealedPhrase;
+            gameStateForClient = pick(gameState[req.query.id], gameStateKeys)
             console.log("dupadupa", gameState);
-            res.send(gameState);
+            res.send(gameStateForClient);
             return;
         } else {
             //else return gameState only with changed failsCounter.
             ++gameState[req.query.id].failsCounter;
+            gameStateForClient = pick(gameState[req.query.id], gameStateKeys)
             console.log("dupadupa2", gameState);
-            res.send(gameState);
+            res.send(gameStateForClient);
         }
     } else res.sendStatus(404).send("Sorry can't find that!") // Here we have to response 404
 });

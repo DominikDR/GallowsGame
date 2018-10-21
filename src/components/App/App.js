@@ -35,7 +35,7 @@ class App extends React.Component {
     }
 
     clickedLetterFeedback = (data) => {
-        console.log("dataFromLetter", dataFromLetter);
+        console.log("dataFromLetter", data);
         this.setState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
@@ -47,7 +47,7 @@ class App extends React.Component {
             <div className={styles.mainPage}>
                 <Header />
                 <Phrase category={this.state.category} phrase={this.state.encodedPhrase} />
-                <Alphabet gameID={this.state.id} />
+                <Alphabet gameID={this.state.id} clickedLetter={this.clickedLetterFeedback}/>
             </div>
         )
     }
