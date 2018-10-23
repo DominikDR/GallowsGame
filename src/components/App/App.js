@@ -58,7 +58,7 @@ class App extends React.Component {
                 <Phrase category={this.state.category} phrase={this.state.encodedPhrase} />
                 <Alphabet gameID={this.state.id} clickedLetter={this.clickedLetterFeedback} />
                 { failsCounter }
-                { isWin || isLose ? (<GameOver endState={this.state.endState} />) : ''}
+                { isWin || isLose ? <GameOver endState={this.state.endState} /> : ''}
             </div>
         )
     }
