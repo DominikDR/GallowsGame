@@ -1,4 +1,9 @@
 .alphabet {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    padding: 50px 120px;
+    margin: 0 auto;
+    max-width: 1105px;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    grid-auto-rows: 50px;
+    grid-gap: 12px;
 }
