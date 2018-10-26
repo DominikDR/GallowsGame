@@ -4,7 +4,6 @@ const hostname = 'localhost';
 const port = 3000;
 const app = new express();
 
-
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/dist/index.html');
 });

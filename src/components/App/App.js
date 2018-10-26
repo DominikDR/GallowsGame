@@ -16,7 +16,7 @@ class App extends React.Component {
     }
 
     fetchPhrase () {
-        const url = "http://localhost:3000/phrases/new"
+        const url = "/phrases/new"
         return fetch(url, {
             method: 'get',
         })
@@ -35,12 +35,10 @@ class App extends React.Component {
                 encodedPhrase,
                 failsCounter,
             })
-            console.log("data-phrase", data);
         });
     }
 
-    clickedLetterFeedback = (data) => {
-        console.log("dataFromLetter", data);
+    handleLetterClicked = (data) => {
         this.setState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
@@ -56,7 +54,7 @@ class App extends React.Component {
             <div className={styles.mainPage}>
                 <Header />
                 <Phrase category={this.state.category} phrase={this.state.encodedPhrase} />
-                <Alphabet gameID={this.state.id} clickedLetter={this.clickedLetterFeedback} />
+                <Alphabet gameID={this.state.id} onLetterClick={this.handleLetterClicked} />
                 { failsCounter }
                 { isWin || isLose ? <GameOver endState={this.state.endState} /> : ''}
             </div>

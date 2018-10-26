@@ -1,9 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const phrases = require('../phrases');
 const sample = require('lodash.sample');
 const pick = require('lodash.pick');
 
 const routes = express.Router();
+
+routes.use(bodyParser.json());
+routes.use(bodyParser.urlencoded({ extended: true }));
 
 const gameState = {};
 let counterID = 0;
@@ -12,7 +16,6 @@ const gameStateKeys = ["id", "category", "failsCounter", "encodedPhrase", "endSt
 const createNewGame = () => {
     let incrementedID = counterID++;
     const newPhrase = getRandomPhrase();
-    console.log("newphrase", newPhrase);
     gameState[incrementedID] = {
         id: incrementedID,
         category: newPhrase.category,
@@ -48,32 +51,29 @@ const encryptPhrase = (phrase) => {
 routes.get('/new', (req, res) => {
     const newGame = createNewGame();
     const reducedNewGame = pick(newGame, gameStateKeys);
-    console.log("newGame", reducedNewGame);
     res.send(reducedNewGame);
 });
 
 const revealLetterInPhrase = (fullPhrase, partPhrase, letter) => {
     const phraseSplitted = fullPhrase.split('');
     const partPhraseSplitted = partPhrase.split('');
-    console.log("partPhrase", partPhrase)
     const revealedLetterInPhrase = phraseSplitted
         .map((element, index) => {
-            const revealedLetters = (element === letter) ? letter : partPhraseSplitted[index];
-            return revealedLetters;
+            const revealedLetter = (element === letter) ? letter : partPhraseSplitted[index];
+            return revealedLetter;
         })
         .join('');
-    console.log("revealedLetterInPhrase",revealedLetterInPhrase)    
     return revealedLetterInPhrase;
 }
 
 routes.post('/check', (req, res) => {
-    const gameStatus = gameState[req.query.id];
+    const gameStatus = gameState[req.body.id];
     let gameStateForClient;
     if (gameStatus) {
-        if (gameStatus.phrase.includes(req.query.letter)) {
+        if (gameStatus.phrase.includes(req.body.letter)) {
             // fn revealLetterInPhrase receive two parameters, full phrase, part phrase and letter. FN have to return string only with revealed letters.
             //Here in if we have to replace gameState with above newPhrase and return it.
-            const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.query.letter);
+            const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.body.letter);
             gameStatus.encodedPhrase = revealedPhrase;
             if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = 1;
 
