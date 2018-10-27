@@ -1,0 +1,27 @@
+.resultField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    background-color: #191919;
+    border: 1px solid #dedede;
+    border-radius: 20px;
+}
+
+.gameOverFrame {
+    font-size: 45px;
+    font-weight: 600;
+    padding: 40px;
+    text-shadow: 1px 1px #000000;
+    text-align: center;
+    white-space: pre-line;
+}
+.win {
+    color: #2e8b57;
+}
+.loose {
+    color: #b22222;
+}

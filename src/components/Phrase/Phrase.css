@@ -1,0 +1,19 @@
+.category {
+    color: #ffdddd;
+    font-size: 16px;
+    margin: 5px;
+    text-align: center;
+
+    @media (min-width: 576px) {
+        font-size: 20px;
+        margin: 8px;
+    }
+}
+
+.phrase {
+    color: #ffdddd;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 5px;
+}
+

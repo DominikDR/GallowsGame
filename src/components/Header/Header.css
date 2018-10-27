@@ -1,0 +1,10 @@
+.title {
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+    background: #99c2ff;
+
+    @media (min-width: 576px) {
+        font-size: 30px;
+    }
+}

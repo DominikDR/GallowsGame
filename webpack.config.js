@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const postcssPresetEnv = require('postcss-preset-env');
 
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html"
@@ -42,7 +43,23 @@ module.exports = {
                         modules: true,
                         localIdentName: "[name]_[local]_[hash:base64]",
                         sourceMap: true,
-                        minimize: true
+                        minimize: true,
+                        importLoaders: 1
+                    }
+                },
+                {
+                    loader: 'postcss-loader', 
+                    options: {
+                        ident: 'postcss',
+                        plugins: () => [
+                            postcssPresetEnv({
+                                features: {
+                                    "nesting-rules": true,
+                                    "custom-media-queries": true
+                                },
+                                stage: 2
+                            })
+                        ]
                     }
                 }
                 ]
@@ -71,3 +88,5 @@ module.exports = {
         })
     ]
   };
+
+  

@@ -1,0 +1,23 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.counter {
+    position: absolute;
+    font-size: 16px;
+    color: #851010;
+    text-align: center;
+
+    @media (min-width: 576px) {
+        font-size: 22px;
+    }
+}
+
+.gallowsImage {
+    height: 100%;
+    width: 100%;
+    max-width: 700px;
+}
