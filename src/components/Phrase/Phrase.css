@@ -1,8 +1,13 @@
 .category {
     color: #ffdddd;
-    font-size: 20px;
+    font-size: 16px;
+    margin: 5px;
     text-align: center;
-    margin: 8px;
+
+    @media (min-width: 576px) {
+        font-size: 20px;
+        margin: 8px;
+    }
 }
 
 .phrase {
@@ -11,3 +16,4 @@
     text-align: center;
     letter-spacing: 5px;
 }
+

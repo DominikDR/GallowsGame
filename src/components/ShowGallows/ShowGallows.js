@@ -13,9 +13,9 @@ const gallowsImages = [gallowsImg0, gallowsImg1, gallowsImg2, gallowsImg3, gallo
 const ShowGallows = ({failsCounter}) => {
     console.log("failscounter", failsCounter)
     return(
-        <div className={styles.counter} >
-            <img className={styles.image} src={gallowsImages[failsCounter]} alt="gallow image"></img>
-            { failsCounter > 0 && <span>Failed attempts: {failsCounter}</span> }
+        <div className={styles.container}>
+            <img className={styles.gallowsImage} src={gallowsImages[failsCounter]} alt="gallows image"></img>
+            { failsCounter > 0 && <span className={styles.counter}>Failed attempts: {failsCounter}</span> }
         </div>
     )
 }

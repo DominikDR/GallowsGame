@@ -3,7 +3,7 @@ import styles from './Header.css';
 
 const Header = () => {
     return (
-        <header className={styles.welcome}>
+        <header className={styles.title}>
             <div>Gallows Game</div>
         </header>
     )
