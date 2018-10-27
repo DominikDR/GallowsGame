@@ -1,8 +1,8 @@
-const gameState = {};
-let counterID = 0;
-const gameStateKeys = ["id", "category", "failsCounter", "encodedPhrase", "endState"];
 const phrases = require('../phrases');
 const sample = require('lodash.sample');
+
+const gameState = {};
+let counterID = 0;
 
 const createNewGame = () => {
     let incrementedID = counterID++;
@@ -51,4 +51,4 @@ const revealLetterInPhrase = (fullPhrase, partPhrase, letter) => {
     return revealedLetterInPhrase;
 }
 
-module.exports = { gameState, counterID, gameStateKeys, ommitedChars, createNewGame, getRandomPhrase, encryptPhrase, revealLetterInPhrase };
+module.exports = { gameState, counterID, ommitedChars, createNewGame, getRandomPhrase, encryptPhrase, revealLetterInPhrase };
