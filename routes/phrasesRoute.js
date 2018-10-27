@@ -1,6 +1,6 @@
 const express = require('express');
 const { gameState, counterID, gameStateKeys, ommitedChars, createNewGame, getRandomPhrase, encryptPhrase, revealLetterInPhrase } = require('../gameServerLogic/gameServerLogic');
-const { GAME_STATE_FAILED, GAME_STATE_WON } = require('../consts');
+const { GAME_STATE_FAILED, GAME_STATE_WON, MAX_ATTEMPTS } = require('../consts');
 const pick = require('lodash.pick');
 
 const routes = express.Router();
