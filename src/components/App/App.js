@@ -11,7 +11,7 @@ class App extends React.Component {
         id: '',
         category: '',
         encodedPhrase: '',
-        failsCounter: '',
+        failsCounter: 0,
         endState: null,
     }
 
@@ -47,16 +47,15 @@ class App extends React.Component {
     }
 
     render() {
-        const failsCounter = this.state.failsCounter ? <ShowGallows failsCounter={this.state.failsCounter} /> : '';
-        const isWin = this.state.endState === 1;
-        const isLose = this.state.endState === 0;
+        const { failsCounter, category, encodedPhrase, id, handleLetterClicked, endState } = this.state;
+
         return (
             <div className={styles.mainPage}>
                 <Header />
-                <Phrase category={this.state.category} phrase={this.state.encodedPhrase} />
-                <Alphabet gameID={this.state.id} onLetterClick={this.handleLetterClicked} />
-                { failsCounter }
-                { isWin || isLose ? <GameOver endState={this.state.endState} /> : ''}
+                <Phrase category={category} phrase={encodedPhrase} />
+                <ShowGallows failsCounter={failsCounter} />
+                <Alphabet gameID={id} onLetterClick={this.handleLetterClicked} />
+                { endState && <GameOver endState={endState} />}
             </div>
         )
     }

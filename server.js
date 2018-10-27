@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
 app.use(express.static('dist'));
 app.use('/phrases', phrasesRoute);
 
-app.listen(3000, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(3000, hostname, (err) => {
+    if (err) {
+        console.error(err);
+    } else {
+        console.log(`Server running at http://${hostname}:${port}/`);        
+    }
 });

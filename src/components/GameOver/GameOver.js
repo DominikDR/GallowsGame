@@ -1,4 +1,5 @@
 import React from 'react';
+import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 import styles from './GameOver.css';
 import classnames from 'classnames';
 
@@ -6,14 +7,14 @@ const GameOver = ({endState}) => {
     
     return(
         <div className={styles.resultField} >
-            { endState === 1 &&
-                <div className={styles.win}>
+            { endState === GAME_STATE_WON &&
+                <div className={classnames(styles.gameOverFrame, styles.win)}>
                     <div>You guessed!</div>
                     <div>Congratulations</div>
                 </div>
             }
-            { endState === 0 &&
-                <div className={classnames(styles.win, styles.loose)}>
+            { endState === GAME_STATE_FAILED &&
+                <div className={classnames(styles.gameOverFrame, styles.loose)}>
                     <div>You lost</div>
                     <div>Try again</div>
                 </div>

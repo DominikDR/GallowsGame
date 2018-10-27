@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const phrases = require('../phrases');
-const sample = require('lodash.sample');
+const { gameState, counterID, gameStateKeys, ommitedChars, createNewGame, getRandomPhrase, encryptPhrase, revealLetterInPhrase } = require('../gameServerLogic/gameServerLogic');
+const { GAME_STATE_FAILED, GAME_STATE_WON } = require('../consts');
 const pick = require('lodash.pick');
 
 const routes = express.Router();
@@ -9,62 +9,11 @@ const routes = express.Router();
 routes.use(bodyParser.json());
 routes.use(bodyParser.urlencoded({ extended: true }));
 
-const gameState = {};
-let counterID = 0;
-const gameStateKeys = ["id", "category", "failsCounter", "encodedPhrase", "endState"];
-
-const createNewGame = () => {
-    let incrementedID = counterID++;
-    const newPhrase = getRandomPhrase();
-    gameState[incrementedID] = {
-        id: incrementedID,
-        category: newPhrase.category,
-        phrase: newPhrase.phrase,
-        failsCounter: 0,
-        encodedPhrase: encryptPhrase(newPhrase.phrase),
-        endState: null,
-    }
-    return gameState[incrementedID];
-}
-
-const getRandomPhrase = () => {
-    const randomCategory = sample(Object.keys(phrases));
-    const upperPhrase = sample(phrases[randomCategory]).toUpperCase();
-    return {
-        category: randomCategory,
-        phrase: upperPhrase,
-    };
-}
-
-const ommitedChars = [' ', '-'];
-
-const encryptPhrase = (phrase) => {
-    const encryptedString = phrase.split('').map(letter => {
-        if(ommitedChars.includes(letter)) {
-            return letter;
-        }
-        return '_';
-    }).join('');
-    return encryptedString;
-}
-
 routes.get('/new', (req, res) => {
     const newGame = createNewGame();
     const reducedNewGame = pick(newGame, gameStateKeys);
     res.send(reducedNewGame);
 });
-
-const revealLetterInPhrase = (fullPhrase, partPhrase, letter) => {
-    const phraseSplitted = fullPhrase.split('');
-    const partPhraseSplitted = partPhrase.split('');
-    const revealedLetterInPhrase = phraseSplitted
-        .map((element, index) => {
-            const revealedLetter = (element === letter) ? letter : partPhraseSplitted[index];
-            return revealedLetter;
-        })
-        .join('');
-    return revealedLetterInPhrase;
-}
 
 routes.post('/check', (req, res) => {
     const gameStatus = gameState[req.body.id];
@@ -75,7 +24,7 @@ routes.post('/check', (req, res) => {
             //Here in if we have to replace gameState with above newPhrase and return it.
             const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.body.letter);
             gameStatus.encodedPhrase = revealedPhrase;
-            if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = 1;
+            if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = GAME_STATE_WON;
 
             gameStateForClient = pick(gameStatus, gameStateKeys);
             console.log("dupadupa", gameState);
@@ -84,7 +33,7 @@ routes.post('/check', (req, res) => {
         } else {
             //else return gameState only with changed failsCounter.
             ++gameStatus.failsCounter;
-            if (gameStatus.failsCounter === 6) gameStatus.endState = 0;
+            if (gameStatus.failsCounter === 6) gameStatus.endState = GAME_STATE_FAILED;
 
             gameStateForClient = pick(gameStatus, gameStateKeys);
             console.log("dupadupa2", gameState);
