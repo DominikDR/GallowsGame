@@ -24,7 +24,6 @@ const checkLetter = (letter, id, onLetterClick) => {
 }
 
 const Letter = React.memo(({letter, gameID, onLetterClick}) => {
-    console.log("gameID",gameID)
     return(
         <div className={styles.letter} onClick={checkLetter.bind(null, letter, gameID, onLetterClick)}>
             {letter}

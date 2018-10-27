@@ -11,7 +11,6 @@ import gallowsImg6 from '../../../assets/6.jpg';
 const gallowsImages = [gallowsImg0, gallowsImg1, gallowsImg2, gallowsImg3, gallowsImg4, gallowsImg5, gallowsImg6];
 
 const ShowGallows = ({failsCounter}) => {
-    console.log("failscounter", failsCounter)
     return(
         <div className={styles.container}>
             <img className={styles.gallowsImage} src={gallowsImages[failsCounter]} alt="gallows image"></img>

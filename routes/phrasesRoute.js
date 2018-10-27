@@ -20,26 +20,21 @@ routes.post('/check', (req, res) => {
     let gameStateForClient;
     if (gameStatus) {
         if (gameStatus.phrase.includes(req.body.letter)) {
-            // fn revealLetterInPhrase receive two parameters, full phrase, part phrase and letter. FN have to return string only with revealed letters.
-            //Here in if we have to replace gameState with above newPhrase and return it.
             const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.body.letter);
             gameStatus.encodedPhrase = revealedPhrase;
             if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = GAME_STATE_WON;
 
             gameStateForClient = pick(gameStatus, gameStateKeys);
-            console.log("dupadupa", gameState);
             res.send(gameStateForClient);
             return;
         } else {
-            //else return gameState only with changed failsCounter.
             ++gameStatus.failsCounter;
             if (gameStatus.failsCounter === 6) gameStatus.endState = GAME_STATE_FAILED;
 
             gameStateForClient = pick(gameStatus, gameStateKeys);
-            console.log("dupadupa2", gameState);
             res.send(gameStateForClient);
         }
-    } else res.sendStatus(404).send("Sorry can't find that!") // Here we have to response 404
+    } else res.sendStatus(404).send("Sorry can't find that!");
 });
 
 module.exports = routes;
