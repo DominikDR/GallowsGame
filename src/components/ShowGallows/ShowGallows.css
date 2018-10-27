@@ -3,10 +3,6 @@
     display: flex;
     justify-content: center;
     padding: 20px;
-
-    @media (min-width: 576px) {
-        padding: 20px;
-    }
 }
 
 .counter {
@@ -23,8 +19,5 @@
 .gallowsImage {
     height: 100%;
     width: 100%;
-
-    @media (min-width: 576px) {
-        max-width: 700px;
-    }
+    max-width: 700px;
 }

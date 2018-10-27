@@ -1,13 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const { gameState, counterID, gameStateKeys, ommitedChars, createNewGame, getRandomPhrase, encryptPhrase, revealLetterInPhrase } = require('../gameServerLogic/gameServerLogic');
 const { GAME_STATE_FAILED, GAME_STATE_WON } = require('../consts');
 const pick = require('lodash.pick');
 
 const routes = express.Router();
-
-routes.use(bodyParser.json());
-routes.use(bodyParser.urlencoded({ extended: true }));
 
 routes.get('/new', (req, res) => {
     const newGame = createNewGame();
@@ -26,10 +22,9 @@ routes.post('/check', (req, res) => {
 
             gameStateForClient = pick(gameStatus, gameStateKeys);
             res.send(gameStateForClient);
-            return;
         } else {
             ++gameStatus.failsCounter;
-            if (gameStatus.failsCounter === 6) gameStatus.endState = GAME_STATE_FAILED;
+            if (gameStatus.failsCounter === MAX_ATTEMPTS) gameStatus.endState = GAME_STATE_FAILED;
 
             gameStateForClient = pick(gameStatus, gameStateKeys);
             res.send(gameStateForClient);

@@ -1,7 +1,7 @@
 import React from 'react';
-import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 import styles from './GameOver.css';
 import classnames from 'classnames';
+import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 
 const GameOver = ({endState}) => {
     
