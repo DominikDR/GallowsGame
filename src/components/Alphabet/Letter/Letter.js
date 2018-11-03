@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Letter.css';
 import classnames from 'classnames';
 
-
 class Letter extends React.PureComponent {
     state = {
         isLetterCorrect: null,
@@ -27,15 +26,9 @@ class Letter extends React.PureComponent {
             console.error(error);
         })
         .then(data => {
-            if (data.failsCounter === this.props.failsCounter) {
-                this.setState({
-                    isLetterCorrect: true,
-                })
-            } else {
-                this.setState({
-                    isLetterCorrect: false,
-                })
-            }
+            this.setState({
+                isLetterCorrect: data.failsCounter === this.props.failsCounter,
+            })
             this.props.onLetterClick(data);
         });
     }

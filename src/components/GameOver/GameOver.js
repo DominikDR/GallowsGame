@@ -21,8 +21,7 @@ const GameOver = ({endState}) => {
                     </div>
                 }
             </div>
-            <div className={styles.overlay}>
-            </div>
+            <div className={styles.overlay} /> 
         </div>
     )
 }
