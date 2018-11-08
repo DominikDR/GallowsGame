@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "build": "webpack --mode development --watch"
+    "build": "webpack --mode development --watch",
+    "test": "jest"
   },
   "author": "DR",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^4.3.1",
+    "jest": "^23.6.0",
     "lodash.pick": "^4.4.0",
     "lodash.sample": "^4.2.1",
     "mini-css-extract-plugin": "^0.4.3",
