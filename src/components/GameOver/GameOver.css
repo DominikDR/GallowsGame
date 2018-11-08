@@ -12,12 +12,13 @@
 .resultField {
     position: absolute;
     top: 70%;
-    left: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
     width: 30rem;
     padding: 1rem 1.5rem;
     background-color: #191919;
     border-radius: 20px;
-    transform: translate(-50%, -50%);
     opacity: 0.9;
     z-index: 1;
 }

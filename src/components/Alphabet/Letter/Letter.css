@@ -18,7 +18,7 @@
     }
 }
 
-.letterHover:hover {
+.letter:hover {
     color: #191919;
     background-color: #dedede;
     border-color: #000;
@@ -26,10 +26,10 @@
 
 .correctLetter {
     background-color: #157c00;
-    cursor: default;
+    pointer-events: none;
 }
 
 .wrongLetter {
     background-color: #bb0000;
-    cursor: default;
+    pointer-events: none;
 }

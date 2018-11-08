@@ -4,8 +4,7 @@ import classnames from 'classnames';
 
 class Letter extends React.PureComponent {
     state = {
-        isLetterCorrect: null,
-        usedLetter: false,
+        letterStatus: '',
     };
 
     checkLetter = (letter, id) => {
@@ -27,32 +26,22 @@ class Letter extends React.PureComponent {
         })
         .then(data => {
             this.setState({
-                isLetterCorrect: data.failsCounter === this.props.failsCounter,
+                letterStatus: data.failsCounter === this.props.failsCounter ? 'LETTER_STATUS_CORRECT' : 'LETTER_STATUS_INCORRECT',
             })
             this.props.onLetterClick(data);
         });
     }
-
-    onClickMethod = () => {
-        if (this.state.usedLetter) return;
-        this.setState ({
-            usedLetter: true,
-        })
-        const { letter, gameID } = this.props;
-        this.checkLetter(letter, gameID);
-    }
-
+    
     render() {
-        const { usedLetter, isLetterCorrect } = this.state;
-
+        const { wasLetterUsed, letterStatus } = this.state;
+        const { letter, gameID } = this.props;
+        
         const letterStyle = classnames(styles.letter, {
-            [styles.letterHover]: !usedLetter,
-        }, usedLetter && isLetterCorrect !== null && {
-            [styles.correctLetter]: isLetterCorrect,
-            [styles.wrongLetter]: !isLetterCorrect,
+            [styles.correctLetter]: letterStatus === 'LETTER_STATUS_CORRECT',
+            [styles.wrongLetter]: letterStatus === 'LETTER_STATUS_INCORRECT',
         });
         return(
-            <div className={letterStyle} onClick={this.onClickMethod}>
+            <div className={letterStyle} onClick={this.checkLetter.bind(null, letter, gameID)}>
                 {this.props.letter}
             </div>
         )
