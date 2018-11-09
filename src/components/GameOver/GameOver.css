@@ -1,14 +1,26 @@
-.resultField {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
     width: 100%;
-    max-width: 500px;
-    height: 200px;
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.7;
+}
+
+.resultField {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 30rem;
+    padding: 1rem 1.5rem;
     background-color: #191919;
-    border: 1px solid #dedede;
     border-radius: 20px;
+    opacity: 0.9;
+    z-index: 1;
 }
 
 .gameOverFrame {

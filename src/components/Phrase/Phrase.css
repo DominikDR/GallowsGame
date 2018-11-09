@@ -15,5 +15,22 @@
     font-size: 20px;
     text-align: center;
     letter-spacing: 5px;
+    
+    @media (min-width: 992px) {
+        font-size: 24px;
+    }
 }
 
+.word {
+    padding-right: 26px;
+    
+    @media (min-width: 576px) {
+        padding-right: 28px;
+    }
+    @media (min-width: 992px) {
+        padding-right: 30px;
+    }
+}
+.word:last-child {
+    padding-right: 0;
+}
