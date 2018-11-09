@@ -1,6 +1,6 @@
-const { encryptPhrase, revealLetterInPhrase, getRandomPhrase } = require('../gameServerLogic');
+const { encryptPhrase, revealLetterInPhrase, getRandomPhrase, counterID, createNewGame } = require('../gameServerLogic');
 const phrases = require('../../phrases');
-import * as gameServerLogic from '../gameServerLogic'
+const gameServerLogic = require('../gameServerLogic');
 
 describe('encryptPhrase', () => {
     it('works with normal test case', () => {
@@ -67,11 +67,24 @@ describe('getRandomPhrase', () => {
 
 describe('createNewGame', () => {
     it('returns object gameState', () => {
+        const getRandomPhraseMock = jest.spyOn(gameServerLogic, 'getRandomPhrase').mockImplementationOnce(() => {
+            console.log("aoaada")
+            return {
+                category: 'actor',
+                phrase: 'Tom Cruise',
+            }
+        });
         const realResult = createNewGame();
-        const getRandomPhraseMock = jest.spyOn(gameServerLogic, 'getRandomPhrase').mockImplementationOnce(() => ({
+        const mockedResult = {0: {
+            id: 0,
             category: 'actor',
-            phrase: 'Tom Cruise'
-        }));
-        expect(realResult).toEqual(true);
+            phrase: 'Tom Cruise',
+            failsCounter: 0,
+            encodedPhrase: '___ ______',
+            endState: null,
+        }}
+
+        expect(getRandomPhraseMock).toHaveBeenCalled()
+        expect(realResult).toEqual(mockedResult);
     });
 });
