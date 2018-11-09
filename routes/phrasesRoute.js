@@ -12,7 +12,7 @@ routes.get('/new', (req, res) => {
 });
 
 routes.post('/check', (req, res) => {
-    const gameStatus = gameState[req.body.id];
+    const gameStatus = gameState[req.body.gameID];
     let gameStateForClient;
     if (gameStatus) {
         if (gameStatus.phrase.includes(req.body.letter)) {
