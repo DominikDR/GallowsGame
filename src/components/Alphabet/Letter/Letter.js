@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './Letter.css';
 import classnames from 'classnames';
+import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
 class Letter extends React.PureComponent {
     state = {
-        isLetterCorrect: null,
-        usedLetter: false,
+        letterStatus: '',
     };
 
-    checkLetter = (letter, id) => {
+    checkLetter = () => {
+        const { letter, gameID } = this.props;
         const url = `/phrases/check`;
         return fetch(url, {
             headers: {
@@ -17,7 +18,7 @@ class Letter extends React.PureComponent {
             },
             method: 'post',
             body: JSON.stringify({
-                id,
+                gameID,
                 letter,
             })
         })
@@ -27,32 +28,21 @@ class Letter extends React.PureComponent {
         })
         .then(data => {
             this.setState({
-                isLetterCorrect: data.failsCounter === this.props.failsCounter,
+                letterStatus: data.failsCounter === this.props.failsCounter ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
             })
             this.props.onLetterClick(data);
         });
     }
-
-    onClickMethod = () => {
-        if (this.state.usedLetter) return;
-        this.setState ({
-            usedLetter: true,
-        })
-        const { letter, gameID } = this.props;
-        this.checkLetter(letter, gameID);
-    }
-
+    
     render() {
-        const { usedLetter, isLetterCorrect } = this.state;
-
+        const { letterStatus } = this.state;
+        
         const letterStyle = classnames(styles.letter, {
-            [styles.letterHover]: !usedLetter,
-        }, usedLetter && isLetterCorrect !== null && {
-            [styles.correctLetter]: isLetterCorrect,
-            [styles.wrongLetter]: !isLetterCorrect,
+            [styles.correctLetter]: letterStatus === LETTER_STATUS_CORRECT,
+            [styles.wrongLetter]: letterStatus === LETTER_STATUS_INCORRECT,
         });
         return(
-            <div className={letterStyle} onClick={this.onClickMethod}>
+            <div className={letterStyle} onClick={this.checkLetter}>
                 {this.props.letter}
             </div>
         )
