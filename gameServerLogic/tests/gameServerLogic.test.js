@@ -64,7 +64,7 @@ describe('getRandomPhrase', () => {
         expect(phrasesIncludesRealResult).toEqual(true);
     });
 });
-
+/* 
 describe('createNewGame', () => {
     it('returns object gameState', () => {
         const getRandomPhraseMock = jest.spyOn(gameServerLogic, 'getRandomPhrase').mockImplementationOnce(() => {
@@ -87,4 +87,4 @@ describe('createNewGame', () => {
         expect(getRandomPhraseMock).toHaveBeenCalled()
         expect(realResult).toEqual(mockedResult);
     });
-});
+}); */

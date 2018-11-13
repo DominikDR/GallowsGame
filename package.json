@@ -11,31 +11,74 @@
   "author": "DR",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.1.0",
+    "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/plugin-transform-react-jsx": "7.0.0",
+    "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
-    "css-loader": "^1.0.0",
-    "express": "^4.16.3",
+    "css-loader": "^1.0.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "express": "^4.16.4",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "image-webpack-loader": "^4.3.1",
+    "identity-obj-proxy": "^3.0.0",
+    "image-webpack-loader": "^4.5.0",
     "jest": "^23.6.0",
     "lodash.pick": "^4.4.0",
     "lodash.sample": "^4.2.1",
-    "mini-css-extract-plugin": "^0.4.3",
-    "nodemon": "^1.18.4",
+    "mini-css-extract-plugin": "^0.4.4",
+    "nodemon": "^1.18.6",
     "postcss-loader": "^3.0.0",
-    "postcss-preset-env": "^6.2.0",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.20.1",
-    "webpack-cli": "^3.1.1"
+    "postcss-preset-env": "^6.4.0",
+    "react-test-renderer": "^16.6.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "client",
+      "node_modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "node"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(css)$": "identity-obj-proxy"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
   }
 }
