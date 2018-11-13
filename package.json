@@ -47,6 +47,9 @@
     "react-dom": "^16.6.3"
   },
   "jest": {
+    "setupFiles": [
+      "./src/jestSetup.js"
+    ],
     "moduleDirectories": [
       "client",
       "node_modules"
@@ -66,19 +69,5 @@
     "moduleNameMapper": {
       "\\.(css)$": "identity-obj-proxy"
     }
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties",
-        {
-          "loose": true
-        }
-      ]
-    ]
   }
 }

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Letter /> Matches snapshot letter is correct 1`] = `
+<div
+  className="letter correctLetter"
+  onClick={[Function]}
+>
+  D
+</div>
+`;
+
+exports[`<Letter /> Matches snapshot letter is incorrect 1`] = `
+<div
+  className="letter wrongLetter"
+  onClick={[Function]}
+>
+  D
+</div>
+`;
+
+exports[`<Letter /> Matches snapshot letter is neither correct nor incorrect 1`] = `
+<div
+  className="letter"
+  onClick={[Function]}
+>
+  D
+</div>
+`;
