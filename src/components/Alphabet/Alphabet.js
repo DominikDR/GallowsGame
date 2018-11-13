@@ -9,7 +9,6 @@ const Alphabet = ({gameID, onLetterClick, failsCounter}) => {
             key={letter}
             letter={letter}
             gameID={gameID}
-            failsCounter={failsCounter}
             onLetterClick={onLetterClick}
         />
     ));

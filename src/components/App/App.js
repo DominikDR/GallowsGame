@@ -54,7 +54,7 @@ class App extends React.Component {
                 <Header />
                 <Phrase category={category} phrase={encodedPhrase} />
                 <ShowGallows failsCounter={failsCounter} />
-                <Alphabet gameID={id} onLetterClick={this.handleLetterClicked} failsCounter={failsCounter}/>
+                <Alphabet gameID={id} onLetterClick={this.handleLetterClicked} />
                 { endState && <GameOver endState={endState} />}
             </div>
         )

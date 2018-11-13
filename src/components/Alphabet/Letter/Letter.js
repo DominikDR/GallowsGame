@@ -28,7 +28,7 @@ class Letter extends React.PureComponent {
         })
         .then(data => {
             this.setState({
-                letterStatus: data.failsCounter === this.props.failsCounter ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
+                letterStatus: data.isLetterCorrect ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
             })
             this.props.onLetterClick(data);
         });
