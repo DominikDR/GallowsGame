@@ -43,7 +43,25 @@ describe('<Letter />', () => {
             await component.setState({ letterStatus: LETTER_STATUS_INCORRECT });
             expect(component).toMatchSnapshot();
         });
+    });
 
+    it('clicking on letter calls API', () => {
+        const onLetterClickMock = jest.fn();
+
+        const component = shallow(
+            <Letter 
+                letter="A"
+                gameID={0}
+                onLetterClick={onLetterClickMock} 
+            />
+        );
+        const mockedFetchResult = {
+            isLetterCorrect: true,
+        }
+        const mockedFetch = fetch.mockResponseOnce(JSON.stringify(mockedFetchResult))
+        component.simulate('click');
+        expect(mockedFetch).toHaveBeenCalled();
+        expect(onLetterClickMock).toHaveBeenCalled();
     })
 
 })

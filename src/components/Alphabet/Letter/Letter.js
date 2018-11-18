@@ -11,6 +11,7 @@ class Letter extends React.PureComponent {
     checkLetter = () => {
         const { letter, gameID } = this.props;
         const url = `/phrases/check`;
+        console.log("clickletteer", letter)
         return fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
@@ -30,6 +31,7 @@ class Letter extends React.PureComponent {
             this.setState({
                 letterStatus: data.isLetterCorrect ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
             })
+            console.log("dabdada", this.props)
             this.props.onLetterClick(data);
         });
     }
