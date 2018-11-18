@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setGameState } from '../../actions/gameState'
+import { bindActionCreators } from 'redux'
 import styles from './App.css';
 import Header from '../Header/Header';
 import Phrase from '../Phrase/Phrase';
@@ -7,13 +10,6 @@ import ShowGallows from '../ShowGallows/ShowGallows';
 import GameOver from '../GameOver/GameOver';
 
 class App extends React.Component {
-    state = {
-        id: '',
-        category: '',
-        encodedPhrase: '',
-        failsCounter: 0,
-        endState: null,
-    }
 
     fetchPhrase () {
         const url = "/phrases/new"
@@ -29,17 +25,12 @@ class App extends React.Component {
     componentDidMount() {
         this.fetchPhrase().then(data => {
             const { id, category, encodedPhrase, failsCounter } = data;
-            this.setState({
-                id,
-                category,
-                encodedPhrase,
-                failsCounter,
-            })
+            this.props.setGameState(data);
         });
     }
 
     handleLetterClicked = (data) => {
-        this.setState({
+        this.props.setGameState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
             endState: data.endState,
@@ -47,12 +38,12 @@ class App extends React.Component {
     }
 
     render() {
-        const { failsCounter, category, encodedPhrase, id, handleLetterClicked, endState } = this.state;
+        const { failsCounter, category, encodedPhrase, id, endState } = this.props;
 
         return (
             <div className={styles.mainPage}>
                 <Header />
-                <Phrase category={category} phrase={encodedPhrase} />
+                <Phrase />
                 <ShowGallows failsCounter={failsCounter} />
                 <Alphabet gameID={id} onLetterClick={this.handleLetterClicked} failsCounter={failsCounter}/>
                 { endState && <GameOver endState={endState} />}
@@ -61,4 +52,25 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = ({ gameState })=> {
+	return {
+		id: gameState.id,
+        category: gameState.category,
+        encodedPhrase: gameState.encodedPhrase,
+        failsCounter: gameState.failsCounter,
+        endState: gameState.endState,
+	}
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators(
+    {
+        setGameState,
+    },
+    dispatch,
+)
+
+/* const mapDispatchToProps = (dispatch) => ({
+	setGameState: (state) => dispatch(setGameState(state))
+}) */
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
