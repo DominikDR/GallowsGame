@@ -8,7 +8,7 @@ const createNewGame = () => {
     let incrementedID = counterID++;
     const newPhrase = getRandomPhrase();
     gameState[incrementedID] = {
-        id: incrementedID,
+        gameID: incrementedID,
         category: newPhrase.category,
         phrase: newPhrase.phrase,
         failsCounter: 0,
