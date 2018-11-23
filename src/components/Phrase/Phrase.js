@@ -18,10 +18,10 @@ class Phrase extends React.PureComponent {
 }
 
 const mapStateToProps = ({ gameState })=> {
-	return {
+    return {
         category: gameState.category,
         phrase: gameState.encodedPhrase,
-	}
+    }
 }
 
 export default connect(mapStateToProps)(Phrase);

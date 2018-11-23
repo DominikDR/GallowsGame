@@ -30,9 +30,9 @@ const GameOver = ({endState}) => {
 }
 
 const mapStateToProps = ({ gameState })=> {
-	return {
+    return {
         endState: gameState.endState,
-	}
+    }
 }
 
 export default connect(mapStateToProps)(GameOver);

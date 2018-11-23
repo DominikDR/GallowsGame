@@ -21,9 +21,9 @@ const ShowGallows = ({failsCounter}) => {
 }
 
 const mapStateToProps = ({ gameState })=> {
-	return {
+    return {
         failsCounter: gameState.failsCounter,
-	}
+    }
 }
 
 export default connect(mapStateToProps)(ShowGallows);

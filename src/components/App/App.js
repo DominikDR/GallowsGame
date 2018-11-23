@@ -48,8 +48,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     dispatch,
 )
 
-/* const mapDispatchToProps = (dispatch) => ({
-	setGameState: (state) => dispatch(setGameState(state))
-}) */
-
 export default connect(null, mapDispatchToProps)(App);
