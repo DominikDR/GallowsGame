@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setGameState } from '../../actions/gameState';
+import { bindActionCreators } from 'redux';
 import styles from './App.css';
 import Header from '../Header/Header';
 import Phrase from '../Phrase/Phrase';
@@ -7,13 +10,6 @@ import ShowGallows from '../ShowGallows/ShowGallows';
 import GameOver from '../GameOver/GameOver';
 
 class App extends React.Component {
-    state = {
-        id: '',
-        category: '',
-        encodedPhrase: '',
-        failsCounter: 0,
-        endState: null,
-    }
 
     fetchPhrase () {
         const url = "/phrases/new"
@@ -28,37 +24,28 @@ class App extends React.Component {
 
     componentDidMount() {
         this.fetchPhrase().then(data => {
-            const { id, category, encodedPhrase, failsCounter } = data;
-            this.setState({
-                id,
-                category,
-                encodedPhrase,
-                failsCounter,
-            })
-        });
-    }
-
-    handleLetterClicked = (data) => {
-        this.setState({
-            encodedPhrase: data.encodedPhrase,
-            failsCounter: data.failsCounter,
-            endState: data.endState,
+            this.props.setGameState(data);
         });
     }
 
     render() {
-        const { failsCounter, category, encodedPhrase, id, handleLetterClicked, endState } = this.state;
-
         return (
             <div className={styles.mainPage}>
                 <Header />
-                <Phrase category={category} phrase={encodedPhrase} />
-                <ShowGallows failsCounter={failsCounter} />
-                <Alphabet gameID={id} onLetterClick={this.handleLetterClicked} failsCounter={failsCounter}/>
-                { endState && <GameOver endState={endState} />}
+                <Phrase />
+                <ShowGallows />
+                <Alphabet />
+                <GameOver />
             </div>
         )
     }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => bindActionCreators(
+    {
+        setGameState,
+    },
+    dispatch,
+)
+
+export default connect(null, mapDispatchToProps)(App);
