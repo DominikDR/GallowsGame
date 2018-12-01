@@ -30,7 +30,8 @@
     "postcss-preset-env": "^6.2.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.1",
-    "webpack-cli": "^3.1.1"
+    "webpack-cli": "^3.1.1",
+    "event-stream": "3.3.4"
   },
   "dependencies": {
     "react": "^16.6.0",
