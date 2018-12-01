@@ -21,7 +21,6 @@
     "css-loader": "^1.0.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^22.1.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
@@ -37,6 +36,7 @@
     "nodemon": "^1.18.4",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.2.0",
+    "regenerator-runtime": "^0.13.1",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.1",
     "webpack-cli": "^3.1.1"
