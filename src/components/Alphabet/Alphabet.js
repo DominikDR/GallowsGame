@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setGameState } from '../../actions/gameState';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { setGameState } from '../../actions/gameState';
 import styles from './Alphabet.css';
 import Letter from './Letter/Letter';
 
-const availableLetters = ['A','Ą','B','C','Ć','D','E','Ę','F','G','H','I','J','K','L','Ł','M','N','Ń','O','Ó','P','Q','R','S','Ś','T','U','V','W','X','Y','Z','Ź','Ż'];
+const availableLetters = ['A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O', 'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ź', 'Ż'];
 
 class Alphabet extends React.Component {
     handleLetterClicked = (data) => {
-        this.props.setGameState({
+        const setGameState = this.props;
+        setGameState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
             endState: data.endState,
@@ -19,7 +21,7 @@ class Alphabet extends React.Component {
     renderAlphabet = () => {
         const { gameID, failsCounter } = this.props;
         const letters = availableLetters.map(letter => (
-            <Letter 
+            <Letter
                 key={letter}
                 letter={letter}
                 gameID={gameID}
@@ -29,22 +31,20 @@ class Alphabet extends React.Component {
         ));
         return letters;
     }
-    
+
     render() {
         return (
-            <div className={styles.alphabet} >
+            <div className={styles.alphabet}>
                 {this.renderAlphabet()}
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = ({ gameState })=> {
+const mapStateToProps = ({ gameState }) => {
 	return {
         gameID: gameState.gameID,
         failsCounter: gameState.failsCounter,
-        encodedPhrase: gameState.encodedPhrase,
-        endState: gameState.endState,
 	}
 }
 
@@ -54,5 +54,11 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     },
     dispatch,
 )
+
+Alphabet.propTypes = {
+    gameID: PropTypes.number.isRequired,
+    failsCounter: PropTypes.number.isRequired,
+    setGameState: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alphabet);

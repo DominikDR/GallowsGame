@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styles from './GameOver.css';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './GameOver.css';
 import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 
 const GameOver = ({endState}) => {
@@ -34,5 +35,9 @@ const mapStateToProps = ({ gameState })=> {
         endState: gameState.endState,
     }
 }
+
+GameOver.propTypes = {
+    endState: PropTypes.string,
+};
 
 export default connect(mapStateToProps)(GameOver);

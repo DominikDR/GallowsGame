@@ -1,7 +1,7 @@
 import { SET_GAME_STATE } from '../actions/gameState';
 
 const initialState = {
-    gameID: '',
+    gameID: 0,
     category: '',
     encodedPhrase: '',
     failsCounter: 0,

@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './Letter.css';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './Letter.css';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
 class Letter extends React.PureComponent {
@@ -48,5 +49,12 @@ class Letter extends React.PureComponent {
         )
     }
 }
+
+Letter.propTypes = {
+    letter: PropTypes.string.isRequired,
+    gameID: PropTypes.number.isRequired,
+    onLetterClick: PropTypes.func.isRequired,
+    failsCounter: PropTypes.number.isRequired,
+};
 
 export default Letter;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './Phrase.css';
 
 class Phrase extends React.PureComponent {
@@ -23,5 +24,10 @@ const mapStateToProps = ({ gameState })=> {
         phrase: gameState.encodedPhrase,
     }
 }
+
+Phrase.propTypes = {
+    category: PropTypes.string.isRequired,
+    phrase: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps)(Phrase);

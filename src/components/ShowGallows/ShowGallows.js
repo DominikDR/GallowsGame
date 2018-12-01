@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styles from './ShowGallows.css';
 import gallowsImg0 from '../../../assets/gallowsImg0.jpg';
 import gallowsImg1 from '../../../assets/gallowsImg1.jpg';
@@ -25,5 +26,9 @@ const mapStateToProps = ({ gameState })=> {
         failsCounter: gameState.failsCounter,
     }
 }
+
+ShowGallows.propTypes = {
+    failsCounter: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps)(ShowGallows);
