@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import regeneratorRuntime from "regenerator-runtime";
 import { setGameState } from '../../actions/gameState';
 import styles from './App.css';
 import Header from '../Header/Header';
