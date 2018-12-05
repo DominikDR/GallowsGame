@@ -6,11 +6,12 @@ import { setGameState } from '../../actions/gameState';
 import styles from './Alphabet.css';
 import Letter from './Letter/Letter';
 
+// eslint-disable-next-line max-len
 const availableLetters = ['A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O', 'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ź', 'Ż'];
 
 class Alphabet extends React.Component {
     handleLetterClicked = (data) => {
-        const setGameState = this.props;
+        const { setGameState } = this.props;
         setGameState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
@@ -41,19 +42,17 @@ class Alphabet extends React.Component {
     }
 }
 
-const mapStateToProps = ({ gameState }) => {
-	return {
-        gameID: gameState.gameID,
-        failsCounter: gameState.failsCounter,
-	}
-}
+const mapStateToProps = ({ gameState }) => ({
+    gameID: gameState.gameID,
+    failsCounter: gameState.failsCounter,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(
     {
         setGameState,
     },
     dispatch,
-)
+);
 
 Alphabet.propTypes = {
     gameID: PropTypes.number.isRequired,

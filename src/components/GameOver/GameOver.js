@@ -5,36 +5,34 @@ import PropTypes from 'prop-types';
 import styles from './GameOver.css';
 import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 
-const GameOver = ({endState}) => {
+const GameOver = ({ endState }) => {
     if (!endState) {
         return null;
     }
-    return(
+    return (
         <div>
             <div className={styles.resultField}>
-                { endState === GAME_STATE_WON &&
+                {endState === GAME_STATE_WON && (
                     <div className={classnames(styles.gameOverFrame, styles.win)}>
                         <div>You guessed!</div>
                         <div>Congratulations</div>
                     </div>
-                }
-                { endState === GAME_STATE_FAILED &&
+                )}
+                {endState === GAME_STATE_FAILED && (
                     <div className={classnames(styles.gameOverFrame, styles.loose)}>
                         <div>You lost</div>
                         <div>Try again</div>
                     </div>
-                }
+                )}
             </div>
-            <div className={styles.overlay} /> 
+            <div className={styles.overlay} />
         </div>
-    )
-}
+    );
+};
 
-const mapStateToProps = ({ gameState })=> {
-    return {
-        endState: gameState.endState,
-    }
-}
+const mapStateToProps = ({ gameState }) => ({
+    endState: gameState.endState,
+});
 
 GameOver.propTypes = {
     endState: PropTypes.string,
