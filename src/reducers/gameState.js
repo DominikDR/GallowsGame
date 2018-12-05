@@ -6,7 +6,7 @@ const initialState = {
     encodedPhrase: '',
     failsCounter: 0,
     endState: null,
-}
+};
 
 const gameStateReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -17,6 +17,6 @@ const gameStateReducer = (state = initialState, action) => {
             };
         default: return state;
     }
-}
+};
 
 export default gameStateReducer;
