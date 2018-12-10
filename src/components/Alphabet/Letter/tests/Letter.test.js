@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Letter from '../Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../../consts';
+import App from '../../../App/App';
 
 //1 method mount- mounts the whole tree of components
 //2 shallow- do shallow render
@@ -58,10 +59,12 @@ describe('<Letter />', () => {
         const mockedFetchResult = {
             isLetterCorrect: true,
         }
-        const mockedFetch = fetch.mockResponseOnce(JSON.stringify(mockedFetchResult))
+        component.instance().checkLetter = jest.fn();
+        
+        const mockedFetch = fetch.mockResponseOnce(JSON.stringify(mockedFetchResult));
         component.simulate('click');
         expect(mockedFetch).toHaveBeenCalled();
-        expect(onLetterClickMock).toHaveBeenCalled();
+        expect(component.instance().checkLetter).toHaveBeenCalled();
     })
 
-})
+});
