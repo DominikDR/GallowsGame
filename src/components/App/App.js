@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setGameState } from '../../actions/gameState';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { setGameState } from '../../actions/gameState';
 import styles from './App.css';
 import Header from '../Header/Header';
 import Phrase from '../Phrase/Phrase';
@@ -10,22 +11,23 @@ import ShowGallows from '../ShowGallows/ShowGallows';
 import GameOver from '../GameOver/GameOver';
 
 class App extends React.Component {
-
-    fetchPhrase () {
-        const url = "/phrases/new"
-        return fetch(url, {
-            method: 'get',
-        })
-        .then(response => response.json())
-        .catch(error => {
-            console.error(error);
-        });
+    async componentDidMount() {
+        const { setGameState } = this.props;
+        const data = await this.fetchPhrase();
+        setGameState(data);
     }
 
-    componentDidMount() {
-        this.fetchPhrase().then(data => {
-            this.props.setGameState(data);
-        });
+    async fetchPhrase() {
+        const url = '/phrases/new';
+        try {
+            const response = await fetch(url, {
+                method: 'get',
+            });
+            return response.json();
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
     }
 
     render() {
@@ -37,7 +39,7 @@ class App extends React.Component {
                 <Alphabet />
                 <GameOver />
             </div>
-        )
+        );
     }
 }
 
@@ -46,6 +48,10 @@ const mapDispatchToProps = dispatch => bindActionCreators(
         setGameState,
     },
     dispatch,
-)
+);
+
+App.propTypes = {
+    setGameState: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(App);
