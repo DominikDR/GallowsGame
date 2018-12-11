@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Letter from '../Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../../consts';
-import App from '../../../App/App';
 
 //1 method mount- mounts the whole tree of components
 //2 shallow- do shallow render
@@ -48,23 +47,28 @@ describe('<Letter />', () => {
 
     it('clicking on letter calls API', () => {
         const onLetterClickMock = jest.fn();
-
+        
         const component = shallow(
             <Letter 
                 letter="A"
                 gameID={0}
                 onLetterClick={onLetterClickMock} 
             />
-        );
+            );
+        //component.instance().onLetterClick = onLetterClickMock;
+
+        const spy = jest.spyOn(component.instance(), 'checkLetter');
+        component.instance().forceUpdate();
+        
         const mockedFetchResult = {
             isLetterCorrect: true,
         }
-        component.instance().checkLetter = jest.fn();
         
         const mockedFetch = fetch.mockResponseOnce(JSON.stringify(mockedFetchResult));
+
         component.simulate('click');
         expect(mockedFetch).toHaveBeenCalled();
-        expect(component.instance().checkLetter).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     })
 
 });
