@@ -17,17 +17,19 @@ const GameOver = ({ endState }) => {
                     <div className={classnames(styles.gameOverFrame, styles.win)}>
                         <div>You guessed!</div>
                         <div>Congratulations</div>
+                        <NewGame />
                     </div>
                 )}
                 {endState === GAME_STATE_FAILED && (
                     <div className={classnames(styles.gameOverFrame, styles.loose)}>
                         <div>You lost</div>
                         <div>Try again</div>
+                        <NewGame />
                     </div>
                 )}
             </div>
-            <NewGame />
             <div className={styles.overlay} />
+
         </div>
     );
 };

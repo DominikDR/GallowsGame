@@ -9,26 +9,25 @@ import Phrase from '../Phrase/Phrase';
 import Alphabet from '../Alphabet/Alphabet';
 import ShowGallows from '../ShowGallows/ShowGallows';
 import GameOver from '../GameOver/GameOver';
-import NewGame from '../NewGame/NewGame';
+
+export const fetchPhrase = async () => {
+    const url = '/phrases/new';
+    try {
+        const response = await fetch(url, {
+            method: 'get',
+        });
+        return response.json();
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+};
 
 class App extends React.Component {
     async componentDidMount() {
         const { setGameState } = this.props;
-        const data = await this.fetchPhrase();
+        const data = await fetchPhrase();
         setGameState(data);
-    }
-
-    async fetchPhrase() {
-        const url = '/phrases/new';
-        try {
-            const response = await fetch(url, {
-                method: 'get',
-            });
-            return response.json();
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
     }
 
     render() {
@@ -38,9 +37,7 @@ class App extends React.Component {
                 <Phrase />
                 <ShowGallows />
                 <Alphabet />
-                <GameOver>
-                    <NewGame startNewGame={this.fetchPhrase} />
-                </GameOver>
+                <GameOver />
             </div>
         );
     }

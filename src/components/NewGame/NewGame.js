@@ -1,15 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { setGameState } from '../../actions/gameState';
 import styles from './NewGame.css';
+import { fetchPhrase } from '../App/App';
 
-const NewGame = ({ startNewGame }) => {
-    return (
-        <button className={styles.newGame} onClick={this.props.startNewGame}>New Game</button>
-    )
-};
+class NewGame extends React.Component {
+    handleFetchPhrase = async () => {
+        const { setGameState } = this.props;
+        const data = await fetchPhrase();
+        setGameState(data);
+    };
 
+    render() {
+        return (
+            <button className={styles.newGame} onClick={this.handleFetchPhrase} type="button">New Game</button>
+        );
+    }
+}
 
+const mapDispatchToProps = dispatch => bindActionCreators(
+    {
+        setGameState,
+    },
+    dispatch,
+);
 
-export default NewGame;
+export default connect(null, mapDispatchToProps)(NewGame);

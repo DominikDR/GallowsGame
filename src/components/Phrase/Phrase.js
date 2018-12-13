@@ -12,7 +12,7 @@ class Phrase extends React.PureComponent {
         return (
             <div>
                 {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-                <div className={styles.category}>Category:{category}</div>
+                <div className={styles.category}>Category: {category}</div>
                 <div className={styles.phrase}>{separatedPhraseWords}</div>
             </div>
         );
