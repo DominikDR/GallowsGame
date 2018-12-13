@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './GameOver.css';
+import NewGame from '../NewGame/NewGame';
 import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 
 const GameOver = ({ endState }) => {
@@ -25,6 +26,7 @@ const GameOver = ({ endState }) => {
                     </div>
                 )}
             </div>
+            <NewGame />
             <div className={styles.overlay} />
         </div>
     );

@@ -9,6 +9,7 @@ import Phrase from '../Phrase/Phrase';
 import Alphabet from '../Alphabet/Alphabet';
 import ShowGallows from '../ShowGallows/ShowGallows';
 import GameOver from '../GameOver/GameOver';
+import NewGame from '../NewGame/NewGame';
 
 class App extends React.Component {
     async componentDidMount() {
@@ -37,7 +38,9 @@ class App extends React.Component {
                 <Phrase />
                 <ShowGallows />
                 <Alphabet />
-                <GameOver />
+                <GameOver>
+                    <NewGame startNewGame={this.fetchPhrase} />
+                </GameOver>
             </div>
         );
     }
