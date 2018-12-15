@@ -21,7 +21,6 @@ class Alphabet extends React.Component {
 
     renderAlphabet = () => {
         const { gameID, failsCounter } = this.props;
-        console.log("setGameState", gameID)
         const letters = availableLetters.map(letter => (
             <Letter
                 key={letter}
@@ -35,7 +34,6 @@ class Alphabet extends React.Component {
     }
 
     render() {
-        const { gameID } = this.props;
         return (
             <div className={styles.alphabet}>
                 {this.renderAlphabet()}

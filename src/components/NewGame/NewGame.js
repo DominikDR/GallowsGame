@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setGameState } from '../../actions/gameState';
-import styles from './NewGame.css';
 import { fetchPhrase } from '../App/App';
+import styles from './NewGame.css';
 
 class NewGame extends React.Component {
     handleFetchPhrase = async () => {
         const { setGameState } = this.props;
         const data = await fetchPhrase();
+        console.log("data", data)
         setGameState(data);
     };
 
