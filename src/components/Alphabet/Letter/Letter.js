@@ -21,7 +21,6 @@ class Letter extends React.PureComponent {
                 }),
             });
             const data = await response.json();
-			console.log("​Letter -> checkLetter -> letter", letter)
             return onLetterClick(data, letter);
         } catch (error) {
             console.error(error);
@@ -31,7 +30,6 @@ class Letter extends React.PureComponent {
 
     render() {
         const { letter, letterStatus } = this.props;
-		console.log("​Letter -> render -> letterStatus", letterStatus)
         const letterStyle = classnames(styles.letter, {
             [styles.correctLetter]: letterStatus === LETTER_STATUS_CORRECT,
             [styles.wrongLetter]: letterStatus === LETTER_STATUS_INCORRECT,
@@ -48,6 +46,9 @@ Letter.propTypes = {
     letter: PropTypes.string.isRequired,
     gameID: PropTypes.number.isRequired,
     onLetterClick: PropTypes.func.isRequired,
+    letterStatus: PropTypes.oneOfType([
+        PropTypes.string,
+    ]),
 };
 
 export default Letter;

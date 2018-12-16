@@ -32,7 +32,6 @@ class Alphabet extends React.Component {
                 [clickedLetter]: data.failsCounter === failsCounter ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
             },
         });
-        console.log("state", this.state)
         setGameState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
@@ -43,7 +42,6 @@ class Alphabet extends React.Component {
     renderAlphabet = () => {
         const { gameID, failsCounter } = this.props;
         const { letterStatus } = this.state;
-		console.log("​Alphabet -> renderAlphabet -> letterStatus", letterStatus)
         const letters = availableLetters.map(letter => (
             <Letter
                 key={letter}
