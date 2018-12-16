@@ -1,6 +1,11 @@
 .newGame {
     height: 50px;
     width: 200px;
+    font-size: 30px;
     color: #333333;
-    background-color: #ffd000;
+    background-color: rgb(255, 208, 0, 1);
+    cursor: pointer;
+    transition: color .1s ease-in-out;
+    box-shadow: 0 3px #d7a700;
+    border-radius: 5px;
 }

@@ -11,15 +11,14 @@
 
 .resultField {
     position: absolute;
-    top: 70%;
+    top: 42%;
     left: 0;
     right: 0;
     margin: auto;
     width: 30rem;
     padding: 1rem 1.5rem;
-    background-color: #191919;
+    background-color: rgb(25, 25, 25, 0.9);
     border-radius: 20px;
-    opacity: 0.9;
     z-index: 1;
 }
 

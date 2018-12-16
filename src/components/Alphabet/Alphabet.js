@@ -5,13 +5,34 @@ import PropTypes from 'prop-types';
 import { setGameState } from '../../actions/gameState';
 import styles from './Alphabet.css';
 import Letter from './Letter/Letter';
+import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../consts';
 
 // eslint-disable-next-line max-len
 const availableLetters = ['A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O', 'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ź', 'Ż'];
 
 class Alphabet extends React.Component {
-    handleLetterClicked = (data) => {
-        const { setGameState } = this.props;
+    state = {
+        letterStatus: {},
+    };
+
+    componentDidUpdate(prevProps) {
+        if (this.props.gameID !== prevProps.gameID) { // eslint-disable-line react/destructuring-assignment
+            this.setState({ // eslint-disable-line react/no-did-update-set-state
+                letterStatus: {},
+            });
+        }
+    }
+
+    handleLetterClicked = (data, clickedLetter) => {
+        const { setGameState, failsCounter } = this.props;
+        const { letterStatus } = this.state;
+        this.setState({
+            letterStatus: {
+                ...letterStatus,
+                [clickedLetter]: data.failsCounter === failsCounter ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
+            },
+        });
+        console.log("state", this.state)
         setGameState({
             encodedPhrase: data.encodedPhrase,
             failsCounter: data.failsCounter,
@@ -21,6 +42,8 @@ class Alphabet extends React.Component {
 
     renderAlphabet = () => {
         const { gameID, failsCounter } = this.props;
+        const { letterStatus } = this.state;
+		console.log("​Alphabet -> renderAlphabet -> letterStatus", letterStatus)
         const letters = availableLetters.map(letter => (
             <Letter
                 key={letter}
@@ -28,6 +51,7 @@ class Alphabet extends React.Component {
                 gameID={gameID}
                 failsCounter={failsCounter}
                 onLetterClick={this.handleLetterClicked}
+                letterStatus={letterStatus[letter]}
             />
         ));
         return letters;
