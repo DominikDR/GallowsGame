@@ -6,7 +6,7 @@ import { setGameState } from '../../actions/gameState';
 import styles from './App.css';
 import Header from '../Header/Header';
 import Phrase from '../Phrase/Phrase';
-import Alphabet from '../Alphabet/Alphabet';
+import SwitchKeyboard from '../Keyboard/SwitchKeyboard/SwitchKeyboard';
 import ShowGallows from '../ShowGallows/ShowGallows';
 import GameOver from '../GameOver/GameOver';
 
@@ -36,7 +36,7 @@ class App extends React.Component {
                 <Header />
                 <Phrase />
                 <ShowGallows />
-                <Alphabet />
+                <SwitchKeyboard />
                 <GameOver />
             </div>
         );

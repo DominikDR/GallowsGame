@@ -1,0 +1,36 @@
+.keyboardContainer {
+    text-align: center;
+}
+
+.changeButton {
+    height: 40px;
+    width: 326px;
+    font-size: 20px;
+    color: #191919;
+    cursor: pointer;
+}
+
+.qwertyContainer {
+    
+    @media (min-width: 576px) {
+        
+    }
+
+    @media (min-width: 768px) {
+    }
+}
+/* 
+.qwertyPart1, .qwertyPart2, .qwertyPart3 {
+    padding: 5px 20px;
+    
+    @media (min-width: 576px) {
+        padding: 6px 20px;
+    }
+
+    @media (min-width: 768px) {
+    }
+} */
+
+.latinLetters {
+
+}
