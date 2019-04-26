@@ -17,13 +17,15 @@ class SwitchKeyboard extends React.PureComponent {
 
     changeKeyboard = () => {
         const { choosenKeyboard } = this.state;
+        localStorage.setItem('choosenKeyboard', choosenKeyboard);
         this.setState({
             choosenKeyboard: choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY,
         });
     }
 
     render() {
-        const { choosenKeyboard } = this.state;
+        const choosenKeyboard = localStorage.getItem('choosenKeyboard');
+		console.log("TCL: SwitchKeyboard -> render -> choosenKeyboard", choosenKeyboard)
         return (
             <div className={styles.keyboardContainer}>
                 <button
