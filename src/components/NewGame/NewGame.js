@@ -9,6 +9,7 @@ class NewGame extends React.Component {
     handleFetchPhrase = async () => {
         const { setGameState } = this.props;
         const data = await fetchPhrase();
+        data.letterStatus = {};
         setGameState(data);
     };
 
