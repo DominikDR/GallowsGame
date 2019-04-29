@@ -1,11 +1,28 @@
 .newGame {
+    display: block;
     height: 50px;
     width: 200px;
     font-size: 30px;
+    font-weight: bold;
     color: #333333;
-    background-color: rgb(255, 208, 0, 1);
     cursor: pointer;
-    transition: color .1s ease-in-out;
-    box-shadow: 0 3px #d7a700;
+    margin: 0 auto;
+    box-shadow: 0 3px #9e7000;
     border-radius: 5px;
+    border: none;
+    outline: none;
+
+    background: linear-gradient(to right, rgb(214, 96, 0) 50%, rgb(255, 208, 0, 1) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .1s ease-in-out;
+}
+
+.newGame:hover {
+    background-position: left bottom;
+    background-color: goldenrod;
+    color: #fff;
+}
+.newGame:active {
+    transform: scale(.97);
 }

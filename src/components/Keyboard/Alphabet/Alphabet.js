@@ -9,14 +9,6 @@ import Letter from '../Letter/Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
 class Alphabet extends React.Component {
-    /* componentDidUpdate(prevProps) {
-        if (this.props.gameID !== prevProps.gameID) { // eslint-disable-line react/destructuring-assignment
-            this.setState({ // eslint-disable-line react/no-did-update-set-state
-                letterStatus: {},
-            });
-        }
-    } */
-
     handleLetterClicked = (data, clickedLetter) => {
         const { setGameState, failsCounter, letterStatus } = this.props;
         setGameState({

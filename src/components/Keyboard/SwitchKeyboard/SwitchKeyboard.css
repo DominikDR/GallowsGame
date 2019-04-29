@@ -2,16 +2,23 @@
     text-align: center;
 }
 
-.changeButton {
-    height: 40px;
-    width: 326px;
-    font-size: 20px;
+.changeKeyboardButton {
     color: #191919;
     cursor: pointer;
+    height: 40px;
+    width: 250px;
+    font-size: 14px;
+    white-space: nowrap;
+
+    @media (min-width: 576px) {
+        height: 40px;
+        width: 350px;
+        font-size: 20px;
+    }
 }
 
 .qwertyContainer {
-    
+    padding: 5px 20px;
     @media (min-width: 576px) {
         
     }
@@ -19,6 +26,37 @@
     @media (min-width: 768px) {
     }
 }
+
+.qwertyPart1 {
+    padding: 5px 20px;
+}
+.qwertyPart2 {
+    padding: 5px 20px;
+}
+.qwertyPart3 {
+    padding: 5px 20px;
+}
+.latinLetters {
+    padding: 5px 20px;
+}
+/* display: grid;
+    padding: 12px 20px;
+    margin: 0 auto;
+    max-width: 790px;
+    grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+    grid-auto-rows: 40px;
+    grid-gap: 10px;
+
+    @media (min-width: 576px) {
+        grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+        grid-auto-rows: 45px;
+        grid-gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        grid-auto-rows: 50px;
+    } */
 /* 
 .qwertyPart1, .qwertyPart2, .qwertyPart3 {
     padding: 5px 20px;

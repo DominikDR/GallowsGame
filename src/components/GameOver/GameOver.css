@@ -15,9 +15,9 @@
     left: 0;
     right: 0;
     margin: auto;
-    width: 30rem;
+    max-width: 30rem;
     padding: 1rem 1.5rem;
-    background-color: rgb(25, 25, 25, 0.9);
+    background-color: rgb(25, 25, 25, 0.75);
     border-radius: 20px;
     z-index: 1;
 }

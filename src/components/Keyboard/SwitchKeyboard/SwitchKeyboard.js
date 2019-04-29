@@ -12,31 +12,30 @@ const latinLetters = ['Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż'];
 
 class SwitchKeyboard extends React.PureComponent {
     state = {
-        choosenKeyboard: QWERTY,
+        choosenKeyboard: localStorage.getItem('choosenKeyboard') || QWERTY,
     };
 
     changeKeyboard = () => {
         const { choosenKeyboard } = this.state;
-        localStorage.setItem('choosenKeyboard', choosenKeyboard);
         this.setState({
             choosenKeyboard: choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY,
         });
     }
 
     render() {
-        const choosenKeyboard = localStorage.getItem('choosenKeyboard');
-		console.log("TCL: SwitchKeyboard -> render -> choosenKeyboard", choosenKeyboard)
+        const { choosenKeyboard } = this.state;
+        localStorage.setItem('choosenKeyboard', choosenKeyboard);
         return (
             <div className={styles.keyboardContainer}>
                 <button
-                    className={styles.changeButton}
+                    className={styles.changeKeyboardButton}
                     onClick={this.changeKeyboard}
                     type="button"
                 >
                     {choosenKeyboard === QWERTY ? 'Change keyboard to Alphabetically' : 'Change keyboard to Qwerty'}
                 </button>
                 {choosenKeyboard === QWERTY ? (
-                    <div className={styles.alphabet}>
+                    <div className={styles.qwertyContainer}>
                         <Alphabet className={styles.qwertyPart1} availableLetters={qwertyLettersPart1} />
                         <Alphabet className={styles.qwertyPart2} availableLetters={qwertyLettersPart2} />
                         <Alphabet className={styles.qwertyPart3} availableLetters={qwertyLettersPart3} />
