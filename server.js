@@ -1,10 +1,12 @@
 const Express = require('express');
+const http = require('http');
 const bodyParser = require('body-parser');
 const phrasesRoute = require('./routes/phrasesRoute');
 
 const hostname = 'localhost';
 const port = 3000;
 const app = new Express();
+const server = new http.Server(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,7 +18,7 @@ app.get('/', (req, res) => {
 app.use(Express.static('dist'));
 app.use('/phrases', phrasesRoute);
 
-app.listen(port, hostname, (err) => {
+server.listen(port, hostname, (err) => {
     if (err) {
         console.error(err);
     } else {
