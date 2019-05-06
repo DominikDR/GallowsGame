@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "build": "webpack --mode development --watch"
+    "build": "webpack --mode development --watch",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "DR",
   "license": "ISC",
