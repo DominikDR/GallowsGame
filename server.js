@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const phrasesRoute = require('./routes/phrasesRoute');
 
 const hostname = 'localhost';
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = new Express();
 const server = new http.Server(app);
 
