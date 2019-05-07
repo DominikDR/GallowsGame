@@ -1,1 +1,1 @@
-export * from './GameOver';
+export { default as GameOver } from './GameOver';

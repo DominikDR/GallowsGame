@@ -1,1 +1,1 @@
-export * from './Letter';
+export { default as Letter } from './Letter';

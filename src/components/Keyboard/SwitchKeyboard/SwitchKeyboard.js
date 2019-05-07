@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SwitchKeyboard.css';
 import { QWERTY, ALPHABETICALLY } from '../../../../consts';
-import Alphabet from '../Alphabet';
+import { Alphabet } from '../Alphabet';
 
 // eslint-disable-next-line max-len
 const allLetters = ['A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O', 'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ź', 'Ż'];
