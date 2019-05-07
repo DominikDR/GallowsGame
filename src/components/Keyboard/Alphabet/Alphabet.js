@@ -23,13 +23,12 @@ class Alphabet extends React.Component {
     }
 
     renderAlphabet = () => {
-        const { gameID, failsCounter, availableLetters, letterStatus } = this.props;
+        const { gameID, availableLetters, letterStatus } = this.props;
         const letters = availableLetters.map(letter => (
             <Letter
                 key={letter}
                 letter={letter}
                 gameID={gameID}
-                failsCounter={failsCounter}
                 onLetterClick={this.handleLetterClicked}
                 letterStatus={letterStatus[letter]}
             />

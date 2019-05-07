@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { setGameState } from '../../actions/gameState';
 import styles from './App.css';
-import Header from '../Header/Header';
-import Phrase from '../Phrase/Phrase';
-import SwitchKeyboard from '../Keyboard/SwitchKeyboard/SwitchKeyboard';
-import ShowGallows from '../ShowGallows/ShowGallows';
-import GameOver from '../GameOver/GameOver';
+import Header from '../Header';
+import Phrase from '../Phrase';
+import SwitchKeyboard from '../Keyboard/SwitchKeyboard';
+import ShowGallows from '../ShowGallows';
+import GameOver from '../GameOver';
 
 export const fetchPhrase = async () => {
     const url = '/phrases/new';
