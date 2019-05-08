@@ -51,4 +51,4 @@ Letter.propTypes = {
     ]),
 };
 
-export default Letter;
+export { Letter };
