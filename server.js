@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.use(Express.static('dist'));
 app.use('/phrases', phrasesRoute);
 
-server.listen(port, hostname, (err) => {
+server.listen(port, (err) => {
     if (err) {
         console.error(err);
     } else {
