@@ -1,1 +1,1 @@
-export { default as Alphabet } from './Alphabet';
+export * from './Alphabet';

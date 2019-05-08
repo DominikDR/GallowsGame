@@ -1,1 +1,1 @@
-export { default as ShowGallows } from './ShowGallows';
+export * from './ShowGallows';

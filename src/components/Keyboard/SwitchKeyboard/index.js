@@ -1,1 +1,1 @@
-export { default as SwitchKeyboard } from './SwitchKeyboard';
+export * from './SwitchKeyboard';

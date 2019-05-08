@@ -12,19 +12,28 @@ const latinLetters = ['Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż'];
 
 class SwitchKeyboard extends React.PureComponent {
     state = {
-        choosenKeyboard: localStorage.getItem(ALPHABETICALLY || QWERTY),
+        choosenKeyboard: ALPHABETICALLY,
     };
+
+    componentDidMount() {
+		console.log("> componentDidMount -> ", localStorage.getItem('choosenKeyboard'));
+        this.setState({
+            choosenKeyboard: localStorage.getItem('choosenKeyboard'),
+        });
+    }
 
     changeKeyboard = () => {
         const { choosenKeyboard } = this.state;
+        console.log("changeKeyboard functino ->", choosenKeyboard)
+        localStorage.setItem('choosenKeyboard', choosenKeyboard);
         this.setState({
             choosenKeyboard: choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY,
         });
-        localStorage.setItem(choosenKeyboard);
     }
 
     render() {
         const { choosenKeyboard } = this.state;
+		console.log("render ->", choosenKeyboard)
         return (
             <div className={styles.keyboardContainer}>
                 <button
@@ -52,4 +61,4 @@ class SwitchKeyboard extends React.PureComponent {
     }
 }
 
-export default SwitchKeyboard;
+export { SwitchKeyboard };
