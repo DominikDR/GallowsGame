@@ -23,7 +23,7 @@ class AlphabetPrimary extends React.Component {
     }
 
     renderAlphabet = () => {
-        const { gameID, availableLetters, letterStatus } = this.props;
+        const { gameID, availableLetters, letterStatus, letterSize } = this.props;
         const letters = availableLetters.map(letter => (
             <Letter
                 key={letter}
@@ -31,6 +31,7 @@ class AlphabetPrimary extends React.Component {
                 gameID={gameID}
                 onLetterClick={this.handleLetterClicked}
                 letterStatus={letterStatus[letter]}
+                letterSize={letterSize}
             />
         ));
         return letters;
@@ -67,6 +68,7 @@ AlphabetPrimary.propTypes = {
     letterStatus: PropTypes.shape({ letter: PropTypes.string }),
     availableLetters: PropTypes.arrayOf(PropTypes.string).isRequired,
     className: PropTypes.string,
+    letterSize: PropTypes.string,
 };
 
 export const Alphabet = connect(mapStateToProps, mapDispatchToProps)(AlphabetPrimary);

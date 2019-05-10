@@ -29,8 +29,8 @@ class Letter extends React.PureComponent {
     }
 
     render() {
-        const { letter, letterStatus } = this.props;
-        const letterStyle = classnames(styles.letter, {
+        const { letter, letterStatus, letterSize } = this.props;
+        const letterStyle = classnames(styles.letter, letterSize, {
             [styles.correctLetter]: letterStatus === LETTER_STATUS_CORRECT,
             [styles.wrongLetter]: letterStatus === LETTER_STATUS_INCORRECT,
         });
@@ -49,6 +49,7 @@ Letter.propTypes = {
     letterStatus: PropTypes.oneOfType([
         PropTypes.string,
     ]),
+    letterSize: PropTypes.string,
 };
 
 export { Letter };

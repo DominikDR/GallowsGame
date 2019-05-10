@@ -37,10 +37,26 @@ class SwitchKeyboard extends React.PureComponent {
                 </button>
                 {choosenKeyboard === QWERTY ? (
                     <div className={styles.qwertyContainer}>
-                        <Alphabet className={styles.qwertyPart1} availableLetters={qwertyLettersPart1} />
-                        <Alphabet className={styles.qwertyPart2} availableLetters={qwertyLettersPart2} />
-                        <Alphabet className={styles.qwertyPart3} availableLetters={qwertyLettersPart3} />
-                        <Alphabet className={styles.latinLetters} availableLetters={latinLetters} />
+                        <Alphabet
+                            className={styles.qwertyPart1}
+                            letterSize={styles.letterSize}
+                            availableLetters={qwertyLettersPart1}
+                        />
+                        <Alphabet
+                            className={styles.qwertyPart2}
+                            letterSize={styles.letterSize}
+                            availableLetters={qwertyLettersPart2}
+                        />
+                        <Alphabet
+                            className={styles.qwertyPart3}
+                            letterSize={styles.letterSize}
+                            availableLetters={qwertyLettersPart3}
+                        />
+                        <Alphabet
+                            className={styles.latinLetters}
+                            letterSize={styles.letterSize}
+                            availableLetters={latinLetters}
+                        />
                     </div>
                 ) : (
                     <div>
