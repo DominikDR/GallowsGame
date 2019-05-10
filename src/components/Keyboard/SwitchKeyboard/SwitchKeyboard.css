@@ -61,9 +61,9 @@
     }
 
     @media (min-width: 576px) {
-        grid-gap: 12px;
         --query-layout-width: 43px;
         & .qwertyPart1, & .qwertyPart2, & .qwertyPart3, & .latinLetters {
+            grid-gap: 12px;
             & .letter {
                 font-size: 25px;
             }

@@ -13,19 +13,26 @@ routes.get('/new', (req, res) => {
 
 routes.post('/check', (req, res) => {
     const gameStatus = gameState[req.body.gameID];
-    let gameStateForClient;
-    if (gameStatus) {
-        if (gameStatus.phrase.includes(req.body.letter)) {
-            const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.body.letter);
-            gameStatus.encodedPhrase = revealedPhrase;
-            if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = GAME_STATE_WON;
-        } else {
-            ++gameStatus.failsCounter;
-            if (gameStatus.failsCounter === MAX_ATTEMPTS) gameStatus.endState = GAME_STATE_FAILED;
-        }
-        gameStateForClient = pick(gameStatus, GAME_STATE_KEYS);
-        res.send(gameStateForClient);
-    } else res.sendStatus(404).send("Sorry can't find that!");
+    const { phrase } = gameStatus;
+    if (!gameStatus) {
+        return res.sendStatus(404).send("Sorry can't find that!");
+    }
+
+    let isLetterCorrect;
+
+    if (phrase.includes(req.body.letter)) {
+        const revealedPhrase = revealLetterInPhrase(phrase, gameStatus.encodedPhrase, req.body.letter);
+        gameStatus.encodedPhrase = revealedPhrase;
+        isLetterCorrect = true;
+        if (gameStatus.encodedPhrase === phrase) gameStatus.endState = GAME_STATE_WON;
+    } else {
+        gameStatus.failsCounter += 1;
+        isLetterCorrect = false;
+        if (gameStatus.failsCounter === MAX_ATTEMPTS) gameStatus.endState = GAME_STATE_FAILED;
+    }
+    const gameStateForClient = pick(gameStatus, GAME_STATE_KEYS);
+    gameStateForClient.isLetterCorrect = isLetterCorrect;
+    return res.send(gameStateForClient);
 });
 
 module.exports = routes;
