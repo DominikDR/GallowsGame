@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SwitchKeyboard.css';
-import { QWERTY, ALPHABETICALLY } from '../../../../consts';
+import { QWERTY, ALPHABETICALLY, CHOOSEN_KEYBOARD_KEY } from '../../../../consts';
 import { Alphabet } from '../Alphabet';
 
 // eslint-disable-next-line max-len
@@ -12,15 +12,15 @@ const latinLetters = ['Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż'];
 
 class SwitchKeyboard extends React.PureComponent {
     state = {
-        choosenKeyboard: localStorage.getItem('choosenKeyboard') || ALPHABETICALLY,
+        choosenKeyboard: localStorage.getItem(CHOOSEN_KEYBOARD_KEY) || ALPHABETICALLY,
     };
 
     changeKeyboard = () => {
-        let { choosenKeyboard } = this.state;
-        choosenKeyboard = choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY;
-        localStorage.setItem('choosenKeyboard', choosenKeyboard);
+        const { choosenKeyboard } = this.state;
+        const newChoosenKeyboard = choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY;
+        localStorage.setItem(CHOOSEN_KEYBOARD_KEY, newChoosenKeyboard);
         this.setState({
-            choosenKeyboard,
+            choosenKeyboard: newChoosenKeyboard,
         });
     }
 
