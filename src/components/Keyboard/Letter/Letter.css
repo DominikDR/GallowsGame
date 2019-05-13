@@ -25,12 +25,6 @@
     border-color: #000;
 }
 
-.letter:checked {
-    color: #dedede;
-    background-color: #dedede;
-    border-color: #dedede;
-}
-
 .correctLetter {
     background-color: #157c00;
     pointer-events: none;
