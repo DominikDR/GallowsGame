@@ -55,10 +55,11 @@ describe('<Letter />', () => {
                 onLetterClick={onLetterClickMock} 
             />
             );
-        //component.instance().onLetterClick = onLetterClickMock;
 
-        const spy = jest.spyOn(component.instance(), 'checkLetter');
-        component.instance().forceUpdate();
+        const instance = component.instance();
+
+        const spy = jest.spyOn(instance, 'checkLetter');
+        instance.forceUpdate();
         
         const mockedFetchResult = {
             isLetterCorrect: true,
