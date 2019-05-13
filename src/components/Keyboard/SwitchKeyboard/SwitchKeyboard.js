@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SwitchKeyboard.css';
-import { QWERTY, ALPHABETICALLY, CHOOSEN_KEYBOARD_KEY } from '../../../../consts';
+import { KeyboardType, KEYBOARD_KEY } from '../../../../consts';
 import { Alphabet } from '../Alphabet';
 
 // eslint-disable-next-line max-len
@@ -12,20 +12,22 @@ const latinLetters = ['Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż'];
 
 class SwitchKeyboard extends React.PureComponent {
     state = {
-        choosenKeyboard: localStorage.getItem(CHOOSEN_KEYBOARD_KEY) || ALPHABETICALLY,
+        currentKeyboard: localStorage.getItem(KEYBOARD_KEY) || KeyboardType.ALPHABETICALLY,
     };
 
     changeKeyboard = () => {
-        const { choosenKeyboard } = this.state;
-        const newChoosenKeyboard = choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY;
-        localStorage.setItem(CHOOSEN_KEYBOARD_KEY, newChoosenKeyboard);
+        const { currentKeyboard } = this.state;
+        const { ALPHABETICALLY, QWERTY } = KeyboardType;
+        const choosenKeyboard = currentKeyboard === QWERTY ? ALPHABETICALLY : QWERTY;
+        localStorage.setItem(KEYBOARD_KEY, choosenKeyboard);
         this.setState({
-            choosenKeyboard: newChoosenKeyboard,
+            currentKeyboard: choosenKeyboard,
         });
     }
 
     render() {
-        const { choosenKeyboard } = this.state;
+        const { currentKeyboard } = this.state;
+        const { QWERTY } = KeyboardType;
         return (
             <div className={styles.keyboardContainer}>
                 <button
@@ -33,9 +35,9 @@ class SwitchKeyboard extends React.PureComponent {
                     onClick={this.changeKeyboard}
                     type="button"
                 >
-                    {choosenKeyboard === QWERTY ? 'Change keyboard to Alphabetically' : 'Change keyboard to Qwerty'}
+                    {currentKeyboard === QWERTY ? 'Change keyboard to Alphabetically' : 'Change keyboard to Qwerty'}
                 </button>
-                {choosenKeyboard === QWERTY ? (
+                {currentKeyboard === QWERTY ? (
                     <div className={styles.qwertyContainer}>
                         <Alphabet
                             className={styles.qwertyPart1}
