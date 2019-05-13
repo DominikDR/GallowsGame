@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { setGameState } from '../../../actions/gameState';
 import styles from './Alphabet.css';
-import Letter from '../Letter';
+import { Letter } from '../Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
-class Alphabet extends React.Component {
+class AlphabetPrimary extends React.Component {
     handleLetterClicked = (data, clickedLetter) => {
         const { setGameState, failsCounter, letterStatus } = this.props;
         setGameState({
@@ -23,13 +22,12 @@ class Alphabet extends React.Component {
     }
 
     renderAlphabet = () => {
-        const { gameID, failsCounter, availableLetters, letterStatus } = this.props;
+        const { gameID, availableLetters, letterStatus } = this.props;
         const letters = availableLetters.map(letter => (
             <Letter
                 key={letter}
                 letter={letter}
                 gameID={gameID}
-                failsCounter={failsCounter}
                 onLetterClick={this.handleLetterClicked}
                 letterStatus={letterStatus[letter]}
             />
@@ -54,14 +52,9 @@ const mapStateToProps = ({ gameState }) => ({
     letterStatus: gameState.letterStatus,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(
-    {
-        setGameState,
-    },
-    dispatch,
-);
+const mapDispatchToProps = { setGameState };
 
-Alphabet.propTypes = {
+AlphabetPrimary.propTypes = {
     gameID: PropTypes.number.isRequired,
     failsCounter: PropTypes.number.isRequired,
     setGameState: PropTypes.func.isRequired,
@@ -70,4 +63,4 @@ Alphabet.propTypes = {
     className: PropTypes.string,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Alphabet);
+export const Alphabet = connect(mapStateToProps, mapDispatchToProps)(AlphabetPrimary);

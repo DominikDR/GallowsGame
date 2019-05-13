@@ -28,7 +28,6 @@ const GameOverPrimary = ({ endState }) => {
                 <NewGame />
             </div>
             <div className={styles.overlay} />
-
         </div>
     );
 };

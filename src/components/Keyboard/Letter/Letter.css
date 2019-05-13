@@ -19,10 +19,16 @@
     }
 }
 
-.letter:hover .letter:active {
+.letter:hover {
     color: #191919;
     background-color: #dedede;
     border-color: #000;
+}
+
+.letter:checked {
+    color: #dedede;
+    background-color: #dedede;
+    border-color: #dedede;
 }
 
 .correctLetter {
