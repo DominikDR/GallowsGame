@@ -19,7 +19,7 @@
     }
 }
 
-.letter:hover .letter:active {
+.letter:hover {
     color: #191919;
     background-color: #dedede;
     border-color: #000;
