@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Letter from '../Letter';
+import { Letter } from '../Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../../consts';
 
 // 1 method mount- mounts the whole tree of components
