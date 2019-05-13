@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { setGameState } from '../../actions/gameState';
 import styles from './App.css';
@@ -43,12 +42,7 @@ class App extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(
-    {
-        setGameState,
-    },
-    dispatch,
-);
+const mapDispatchToProps = { setGameState };
 
 App.propTypes = {
     setGameState: PropTypes.func.isRequired,

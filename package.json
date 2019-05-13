@@ -4,11 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "build": "webpack --mode development --watch"
+    "start": "node server.js",
+    "build": "webpack --mode development",
+    "build:watch": "webpack --mode development --watch",
+    "postinstall": "npm run build"
   },
   "author": "DR",
   "license": "ISC",
+  "engines": {
+    "node": "11.14.0"
+  },
   "devDependencies": {
     "@babel/core": "7.1.0",
     "@babel/plugin-proposal-class-properties": "7.1.0",
