@@ -6,6 +6,7 @@ const initialState = {
     encodedPhrase: '',
     failsCounter: 0,
     endState: null,
+    letterStatus: {},
 };
 
 const gameStateReducer = (state = initialState, action) => {

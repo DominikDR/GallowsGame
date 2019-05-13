@@ -5,12 +5,8 @@ import styles from './Letter.css';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
 class Letter extends React.PureComponent {
-    state = {
-        letterStatus: '',
-    };
-
     checkLetter = async () => {
-        const { letter, gameID, failsCounter, onLetterClick } = this.props;
+        const { letter, gameID, onLetterClick } = this.props;
         const url = '/phrases/check';
         try {
             const response = await fetch(url, {
@@ -25,10 +21,7 @@ class Letter extends React.PureComponent {
                 }),
             });
             const data = await response.json();
-            this.setState({
-                letterStatus: data.failsCounter === failsCounter ? LETTER_STATUS_CORRECT : LETTER_STATUS_INCORRECT,
-            });
-            return onLetterClick(data);
+            return onLetterClick(data, letter);
         } catch (error) {
             console.error(error);
             return error;
@@ -36,10 +29,8 @@ class Letter extends React.PureComponent {
     }
 
     render() {
-        const { letterStatus } = this.state;
-        const { letter } = this.props;
-
-        const letterStyle = classnames(styles.letter, {
+        const { letter, letterStatus, letterSize } = this.props;
+        const letterStyle = classnames(styles.letter, letterSize, {
             [styles.correctLetter]: letterStatus === LETTER_STATUS_CORRECT,
             [styles.wrongLetter]: letterStatus === LETTER_STATUS_INCORRECT,
         });
@@ -55,7 +46,10 @@ Letter.propTypes = {
     letter: PropTypes.string.isRequired,
     gameID: PropTypes.number.isRequired,
     onLetterClick: PropTypes.func.isRequired,
-    failsCounter: PropTypes.number.isRequired,
+    letterStatus: PropTypes.oneOfType([
+        PropTypes.string,
+    ]),
+    letterSize: PropTypes.string,
 };
 
-export default Letter;
+export { Letter };

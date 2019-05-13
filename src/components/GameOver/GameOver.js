@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './GameOver.css';
+import { NewGame } from '../NewGame';
 import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 
-const GameOver = ({ endState }) => {
+const GameOverPrimary = ({ endState }) => {
     if (!endState) {
         return null;
     }
@@ -24,6 +25,7 @@ const GameOver = ({ endState }) => {
                         <div>Try again</div>
                     </div>
                 )}
+                <NewGame />
             </div>
             <div className={styles.overlay} />
         </div>
@@ -34,8 +36,8 @@ const mapStateToProps = ({ gameState }) => ({
     endState: gameState.endState,
 });
 
-GameOver.propTypes = {
+GameOverPrimary.propTypes = {
     endState: PropTypes.string,
 };
 
-export default connect(mapStateToProps)(GameOver);
+export const GameOver = connect(mapStateToProps)(GameOverPrimary);

@@ -11,16 +11,19 @@
 
 .resultField {
     position: absolute;
-    top: 70%;
+    top: 30%;
     left: 0;
     right: 0;
     margin: auto;
-    width: 30rem;
+    max-width: 30rem;
     padding: 1rem 1.5rem;
-    background-color: #191919;
+    background-color: rgb(25, 25, 25, 0.75);
     border-radius: 20px;
-    opacity: 0.9;
     z-index: 1;
+
+    @media (min-width: 576px) {
+        top: 42%;
+    }
 }
 
 .gameOverFrame {
