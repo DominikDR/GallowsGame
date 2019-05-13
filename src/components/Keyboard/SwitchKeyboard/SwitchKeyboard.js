@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SwitchKeyboard.css';
-import { QWERTY, ALPHABETICALLY } from '../../../../consts';
-import Alphabet from '../Alphabet/Alphabet';
+import { KeyboardType, KEYBOARD_KEY } from '../../../../consts';
+import { Alphabet } from '../Alphabet';
 
 // eslint-disable-next-line max-len
 const allLetters = ['A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O', 'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ź', 'Ż'];
@@ -12,19 +12,22 @@ const latinLetters = ['Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż'];
 
 class SwitchKeyboard extends React.PureComponent {
     state = {
-        choosenKeyboard: localStorage.getItem('choosenKeyboard') || QWERTY,
+        currentKeyboard: localStorage.getItem(KEYBOARD_KEY) || KeyboardType.ALPHABETICALLY,
     };
 
     changeKeyboard = () => {
-        const { choosenKeyboard } = this.state;
+        const { currentKeyboard } = this.state;
+        const { ALPHABETICALLY, QWERTY } = KeyboardType;
+        const choosenKeyboard = currentKeyboard === QWERTY ? ALPHABETICALLY : QWERTY;
+        localStorage.setItem(KEYBOARD_KEY, choosenKeyboard);
         this.setState({
-            choosenKeyboard: choosenKeyboard === QWERTY ? ALPHABETICALLY : QWERTY,
+            currentKeyboard: choosenKeyboard,
         });
     }
 
     render() {
-        const { choosenKeyboard } = this.state;
-        localStorage.setItem('choosenKeyboard', choosenKeyboard);
+        const { currentKeyboard } = this.state;
+        const { QWERTY } = KeyboardType;
         return (
             <div className={styles.keyboardContainer}>
                 <button
@@ -32,14 +35,30 @@ class SwitchKeyboard extends React.PureComponent {
                     onClick={this.changeKeyboard}
                     type="button"
                 >
-                    {choosenKeyboard === QWERTY ? 'Change keyboard to Alphabetically' : 'Change keyboard to Qwerty'}
+                    {currentKeyboard === QWERTY ? 'Change keyboard to Alphabetically' : 'Change keyboard to Qwerty'}
                 </button>
-                {choosenKeyboard === QWERTY ? (
+                {currentKeyboard === QWERTY ? (
                     <div className={styles.qwertyContainer}>
-                        <Alphabet className={styles.qwertyPart1} availableLetters={qwertyLettersPart1} />
-                        <Alphabet className={styles.qwertyPart2} availableLetters={qwertyLettersPart2} />
-                        <Alphabet className={styles.qwertyPart3} availableLetters={qwertyLettersPart3} />
-                        <Alphabet className={styles.latinLetters} availableLetters={latinLetters} />
+                        <Alphabet
+                            className={styles.qwertyPart1}
+                            letterSize={styles.letterSize}
+                            availableLetters={qwertyLettersPart1}
+                        />
+                        <Alphabet
+                            className={styles.qwertyPart2}
+                            letterSize={styles.letterSize}
+                            availableLetters={qwertyLettersPart2}
+                        />
+                        <Alphabet
+                            className={styles.qwertyPart3}
+                            letterSize={styles.letterSize}
+                            availableLetters={qwertyLettersPart3}
+                        />
+                        <Alphabet
+                            className={styles.latinLetters}
+                            letterSize={styles.letterSize}
+                            availableLetters={latinLetters}
+                        />
                     </div>
                 ) : (
                     <div>
@@ -52,4 +71,4 @@ class SwitchKeyboard extends React.PureComponent {
     }
 }
 
-export default SwitchKeyboard;
+export { SwitchKeyboard };

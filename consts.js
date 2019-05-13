@@ -4,9 +4,11 @@ const MAX_ATTEMPTS = 6;
 const GAME_STATE_KEYS = ['gameID', 'category', 'failsCounter', 'encodedPhrase', 'endState'];
 const LETTER_STATUS_CORRECT = 'LETTER_STATUS_CORRECT';
 const LETTER_STATUS_INCORRECT = 'LETTER_STATUS_INCORRECT';
-const QWERTY = 'QWERTY';
-const ALPHABETICALLY = 'ALPHABETICALLY';
-
+const KEYBOARD_KEY = 'KEYBOARD_KEY';
+const KeyboardType = {
+    QWERTY: 'QWERTY',
+    ALPHABETICAL: 'ALPHABETICAL',
+};
 
 module.exports = {
     GAME_STATE_FAILED,
@@ -15,6 +17,6 @@ module.exports = {
     GAME_STATE_KEYS,
     LETTER_STATUS_CORRECT,
     LETTER_STATUS_INCORRECT,
-    QWERTY,
-    ALPHABETICALLY,
+    KEYBOARD_KEY,
+    KeyboardType,
 };

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { setGameState } from '../../../actions/gameState';
 import styles from './Alphabet.css';
-import Letter from '../Letter/Letter';
+import Letter from '../Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
 class Alphabet extends React.Component {

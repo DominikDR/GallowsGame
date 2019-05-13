@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { setGameState } from '../../actions/gameState';
 import { fetchPhrase } from '../App/App';
 import styles from './NewGame.css';
 
-class NewGame extends React.Component {
+class NewGamePrimary extends React.Component {
     handleFetchPhrase = async () => {
         const { setGameState } = this.props;
         const data = await fetchPhrase();
@@ -20,11 +19,6 @@ class NewGame extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(
-    {
-        setGameState,
-    },
-    dispatch,
-);
+const mapDispatchToProps = { setGameState };
 
-export default connect(null, mapDispatchToProps)(NewGame);
+export const NewGame = connect(null, mapDispatchToProps)(NewGamePrimary);

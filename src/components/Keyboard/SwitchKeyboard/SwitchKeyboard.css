@@ -1,3 +1,7 @@
+:root {
+    --query-layout-width: 27px;
+}
+
 .keyboardContainer {
     text-align: center;
 }
@@ -17,6 +21,16 @@
     }
 }
 
+.qwertyContainer .letterSize {
+    font-size: 16px;
+    @media (min-width: 576px) {
+        font-size: 25px;
+    }
+    @media (min-width: 768px) {
+        font-size: 30px;
+    }
+}
+
 .qwertyContainer {
     display: flex;
     justify-content: center;
@@ -24,57 +38,47 @@
     padding: 12px;
 
     & .qwertyPart1, & .qwertyPart2, & .qwertyPart3, & .latinLetters {
-        & .letter {
-            font-size: 20px;
+        &.letter {
+            font-size: 18px;
         }
         padding: 5px 0px;
-        grid-auto-rows: 35px;
-        grid-gap: 12px;
-        grid-template-columns: repeat(10, 35px);
+        grid-auto-rows: var(--query-layout-width);
+        grid-gap: 8px;
+        grid-template-columns: repeat(10, var(--query-layout-width));
     }
     & .qwertyPart2 {
-        grid-template-columns: repeat(9, 35px);
+        grid-template-columns: repeat(9, var(--query-layout-width));
         padding-right: 15px;
     }
     & .qwertyPart3 {
-        grid-template-columns: repeat(7, 35px);
+        grid-template-columns: repeat(7, var(--query-layout-width));
         padding-right: 60px;
         padding-bottom: 15px;
     }
     $ .latinLetters {
-        grid-template-columns: repeat(9, 35px);
+        grid-template-columns: repeat(9, var(--query-layout-width));
 
     }
+
     @media (min-width: 576px) {
+        --query-layout-width: 43px;
         & .qwertyPart1, & .qwertyPart2, & .qwertyPart3, & .latinLetters {
+            grid-gap: 12px;
             & .letter {
                 font-size: 25px;
             }
-            grid-auto-rows: 43px;
-            grid-template-columns: repeat(10, 43px);
-        }
-        & .qwertyPart2 {
-            grid-template-columns: repeat(9, 43px);
         }
         & .qwertyPart3 {
-            grid-template-columns: repeat(7, 43px);
             padding-right: 70px;
         }
     }
 
     @media (min-width: 768px) {
+        --query-layout-width: 50px;
         & .qwertyPart1, & .qwertyPart2, & .qwertyPart3, & .latinLetters {
             & .letter {
                 font-size: 30px;
             }
-            grid-auto-rows: 50px;
-            grid-template-columns: repeat(10, 50px);
-        }
-        & .qwertyPart2 {
-            grid-template-columns: repeat(9, 50px);
-        }
-        & .qwertyPart3 {
-            grid-template-columns: repeat(7, 50px);
         }
     }
 }
