@@ -1,7 +1,7 @@
 const express = require('express');
-const { gameState, counterID, ommitedChars, createNewGame, getRandomPhrase, encryptPhrase, revealLetterInPhrase } = require('../gameServerLogic/gameServerLogic');
-const { GAME_STATE_FAILED, GAME_STATE_WON, MAX_ATTEMPTS, GAME_STATE_KEYS } = require('../consts');
 const pick = require('lodash.pick');
+const { gameState, createNewGame, revealLetterInPhrase } = require('../gameServerLogic/gameServerLogic');
+const { GAME_STATE_FAILED, GAME_STATE_WON, MAX_ATTEMPTS, GAME_STATE_KEYS } = require('../consts');
 
 const routes = express.Router();
 
@@ -13,26 +13,26 @@ routes.get('/new', (req, res) => {
 
 routes.post('/check', (req, res) => {
     const gameStatus = gameState[req.body.gameID];
+    const { phrase } = gameStatus;
     if (!gameStatus) {
-        return res.sendStatus(404).send("Sorry can't find that!")
+        return res.sendStatus(404).send("Sorry can't find that!");
     }
 
-    let gameStateForClient;
     let isLetterCorrect;
 
-    if (gameStatus.phrase.includes(req.body.letter)) {
-        const revealedPhrase = revealLetterInPhrase(gameStatus.phrase, gameStatus.encodedPhrase, req.body.letter);
+    if (phrase.includes(req.body.letter)) {
+        const revealedPhrase = revealLetterInPhrase(phrase, gameStatus.encodedPhrase, req.body.letter);
         gameStatus.encodedPhrase = revealedPhrase;
         isLetterCorrect = true;
-        if (gameStatus.encodedPhrase === gameStatus.phrase) gameStatus.endState = GAME_STATE_WON;
+        if (gameStatus.encodedPhrase === phrase) gameStatus.endState = GAME_STATE_WON;
     } else {
-        ++gameStatus.failsCounter;
+        gameStatus.failsCounter += 1;
         isLetterCorrect = false;
         if (gameStatus.failsCounter === MAX_ATTEMPTS) gameStatus.endState = GAME_STATE_FAILED;
-    } 
-    gameStateForClient = pick(gameStatus, GAME_STATE_KEYS);
+    }
+    const gameStateForClient = pick(gameStatus, GAME_STATE_KEYS);
     gameStateForClient.isLetterCorrect = isLetterCorrect;
-    res.send(gameStateForClient);
+    return res.send(gameStateForClient);
 });
 
 module.exports = routes;

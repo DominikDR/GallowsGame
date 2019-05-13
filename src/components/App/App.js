@@ -1,64 +1,51 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setGameState } from '../../actions/gameState';
 import styles from './App.css';
-import Header from '../Header/Header';
-import Phrase from '../Phrase/Phrase';
-import Alphabet from '../Alphabet/Alphabet';
-import ShowGallows from '../ShowGallows/ShowGallows';
-import GameOver from '../GameOver/GameOver';
+import { Header } from '../Header';
+import { Phrase } from '../Phrase';
+import { SwitchKeyboard } from '../Keyboard/SwitchKeyboard';
+import { ShowGallows } from '../ShowGallows';
+import { GameOver } from '../GameOver';
+
+export const fetchPhrase = async () => {
+    const url = '/phrases/new';
+    try {
+        const response = await fetch(url, {
+            method: 'get',
+        });
+        return response.json();
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+};
 
 class App extends React.Component {
-    state = {
-        id: '',
-        category: '',
-        encodedPhrase: '',
-        failsCounter: 0,
-        endState: null,
-    }
-
-    fetchPhrase () {
-        const url = "/phrases/new"
-        return fetch(url, {
-            method: 'get',
-        })
-        .then(response => response.json())
-        .catch(error => {
-            console.error(error);
-        });
-    }
-
-    componentDidMount() {
-        this.fetchPhrase().then(data => {
-            const { id, category, encodedPhrase, failsCounter } = data;
-            this.setState({
-                id,
-                category,
-                encodedPhrase,
-                failsCounter,
-            })
-        });
-    }
-
-    handleLetterClicked = (data) => {
-        this.setState({
-            encodedPhrase: data.encodedPhrase,
-            failsCounter: data.failsCounter,
-            endState: data.endState,
-        });
+    async componentDidMount() {
+        const { setGameState } = this.props;
+        const data = await fetchPhrase();
+        setGameState(data);
     }
 
     render() {
-        const { failsCounter, category, encodedPhrase, id, handleLetterClicked, endState } = this.state;
-
         return (
             <div className={styles.mainPage}>
                 <Header />
-                <Phrase category={category} phrase={encodedPhrase} />
-                <ShowGallows failsCounter={failsCounter} />
-                <Alphabet gameID={id} onLetterClick={this.handleLetterClicked} />
-                { endState && <GameOver endState={endState} />}
+                <Phrase />
+                <ShowGallows />
+                <SwitchKeyboard />
+                <GameOver />
             </div>
-        )
+        );
     }
 }
 
-export default App;
+const mapDispatchToProps = { setGameState };
+
+App.propTypes = {
+    setGameState: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(App);

@@ -1,24 +1,27 @@
-const express = require('express');
+const Express = require('express');
+const http = require('http');
 const bodyParser = require('body-parser');
 const phrasesRoute = require('./routes/phrasesRoute');
+
 const hostname = 'localhost';
-const port = 3000;
-const app = new express();
+const port = process.env.PORT || 3000;
+const app = new Express();
+const server = new http.Server(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/dist/index.html');
+    res.sendFile(`${__dirname}/dist/index.html`);
 });
 
-app.use(express.static('dist'));
+app.use(Express.static('dist'));
 app.use('/phrases', phrasesRoute);
 
-app.listen(port, hostname, (err) => {
+server.listen(port, (err) => {
     if (err) {
         console.error(err);
     } else {
-        console.log(`Server running at http://${hostname}:${port}/`);        
+        console.log(`Server running at http://${hostname}:${port}/`); // eslint-disable-line no-console
     }
 });
