@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './Phrase.css';
 
-class PhraseConnected extends React.PureComponent {
+class Phrase extends React.PureComponent {
     render() {
         const { category, phrase } = this.props;
         const separatedPhraseWords = phrase.split(' ').map((word, index) => (
@@ -24,9 +24,9 @@ const mapStateToProps = ({ gameState }) => ({
     phrase: gameState.encodedPhrase,
 });
 
-PhraseConnected.propTypes = {
+Phrase.propTypes = {
     category: PropTypes.string.isRequired,
     phrase: PropTypes.string.isRequired,
 };
 
-export const Phrase = connect(mapStateToProps)(PhraseConnected);
+export default connect(mapStateToProps)(Phrase);

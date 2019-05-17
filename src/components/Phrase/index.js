@@ -1,1 +1,1 @@
-export * from './Phrase';
+export { default as Phrase } from './Phrase';

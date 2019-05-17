@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> rendering renders the component 1`] = `
+<div
+  className="mainPage"
+>
+  <Header />
+  <Connect(Phrase) />
+  <Connect(ShowGallows) />
+  <SwitchKeyboard />
+  <Connect(GameOver) />
+</div>
+`;

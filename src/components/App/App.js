@@ -10,7 +10,7 @@ import { SwitchKeyboard } from '../Keyboard/SwitchKeyboard';
 import { ShowGallows } from '../ShowGallows';
 import { GameOver } from '../GameOver';
 
-class App extends React.Component {
+export class App extends React.Component {
     async componentDidMount() {
         const { setGameState } = this.props;
         const data = await fetchPhrase();

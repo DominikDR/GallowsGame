@@ -1,23 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import toJson from 'enzyme-to-json';
+import configureStore from 'redux-mock-store';
 import { shallow } from 'enzyme';
 import { App } from '../App';
 
 // 1 method mount- mounts the whole tree of components
 // 2 shallow- do shallow render
 // jest.fn() - creates anonymous function which always returns true
-/* 
+
+const initialState = {
+    gameID: 0,
+    category: '',
+    encodedPhrase: '',
+    failsCounter: 0,
+    endState: null,
+    letterStatus: {},
+};
+const mockStore = configureStore();
 let component;
+let store;
 
 beforeEach(() => {
-    component = shallow(<App />);
+    store = mockStore(initialState);
+    component = shallow(<App store={store} />);
 });
- */
 
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+
+describe('<App /> rendering', () => {
+    it('renders the component', () => {
+        expect(toJson(component)).toMatchSnapshot();
+    });
 });
+
 /* 
 describe('<App /> rendering', () => {
     it('renders without crashing', () => {

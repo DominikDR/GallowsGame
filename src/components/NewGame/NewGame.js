@@ -4,7 +4,7 @@ import { setGameState } from '../../actions/gameState';
 import { fetchPhrase } from '../../fetchPhrase';
 import styles from './NewGame.css';
 
-class NewGameConnected extends React.Component {
+class NewGame extends React.Component {
     handleFetchPhrase = async () => {
         const { setGameState } = this.props;
         const data = await fetchPhrase();
@@ -21,4 +21,4 @@ class NewGameConnected extends React.Component {
 
 const mapDispatchToProps = { setGameState };
 
-export const NewGame = connect(null, mapDispatchToProps)(NewGameConnected);
+export default connect(null, mapDispatchToProps)(NewGame);

@@ -7,6 +7,10 @@ module.exports = function (api) {
         ],
         "plugins": [
             "@babel/plugin-proposal-class-properties",
+            [
+                "@babel/transform-runtime", {
+                "regenerator": true
+            }],
         ]
     }
-}
+};
