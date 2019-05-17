@@ -10,7 +10,7 @@ import { SwitchKeyboard } from '../Keyboard/SwitchKeyboard';
 import { ShowGallows } from '../ShowGallows';
 import { GameOver } from '../GameOver';
 
-class AppConnected extends React.Component {
+class App extends React.Component {
     async componentDidMount() {
         const { setGameState } = this.props;
         const data = await fetchPhrase();
@@ -32,8 +32,8 @@ class AppConnected extends React.Component {
 
 const mapDispatchToProps = { setGameState };
 
-AppConnected.propTypes = {
+App.propTypes = {
     setGameState: PropTypes.func.isRequired,
 };
 
-export const App = connect(null, mapDispatchToProps)(AppConnected);
+export default connect(null, mapDispatchToProps)(App);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setGameState } from '../../actions/gameState';
-import { fetchPhrase } from '../App/App';
+import { fetchPhrase } from '../../fetchPhrase';
 import styles from './NewGame.css';
 
 class NewGameConnected extends React.Component {
