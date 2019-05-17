@@ -12,7 +12,7 @@ import gallowsImg6 from '../../../assets/gallowsImg6.jpg';
 
 const gallowsImages = [gallowsImg0, gallowsImg1, gallowsImg2, gallowsImg3, gallowsImg4, gallowsImg5, gallowsImg6];
 
-const ShowGallowsPrimary = ({ failsCounter }) => (
+const ShowGallowsConnected = ({ failsCounter }) => (
     <div className={styles.container}>
         <img className={styles.gallowsImage} src={gallowsImages[failsCounter]} alt="gallows" />
         {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
@@ -24,8 +24,8 @@ const mapStateToProps = ({ gameState }) => ({
     failsCounter: gameState.failsCounter,
 });
 
-ShowGallowsPrimary.propTypes = {
+ShowGallowsConnected.propTypes = {
     failsCounter: PropTypes.number.isRequired,
 };
 
-export const ShowGallows = connect(mapStateToProps)(ShowGallowsPrimary);
+export const ShowGallows = connect(mapStateToProps)(ShowGallowsConnected);

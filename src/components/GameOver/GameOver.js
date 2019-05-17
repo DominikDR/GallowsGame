@@ -6,7 +6,7 @@ import styles from './GameOver.css';
 import { NewGame } from '../NewGame';
 import { GAME_STATE_FAILED, GAME_STATE_WON } from '../../../consts';
 
-const GameOverPrimary = ({ endState }) => {
+const GameOverConnected = ({ endState }) => {
     if (!endState) {
         return null;
     }
@@ -36,8 +36,8 @@ const mapStateToProps = ({ gameState }) => ({
     endState: gameState.endState,
 });
 
-GameOverPrimary.propTypes = {
+GameOverConnected.propTypes = {
     endState: PropTypes.string,
 };
 
-export const GameOver = connect(mapStateToProps)(GameOverPrimary);
+export const GameOver = connect(mapStateToProps)(GameOverConnected);

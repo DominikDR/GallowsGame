@@ -7,7 +7,7 @@ import styles from './Alphabet.css';
 import { Letter } from '../Letter';
 import { LETTER_STATUS_CORRECT, LETTER_STATUS_INCORRECT } from '../../../../consts';
 
-class AlphabetPrimary extends React.Component {
+class AlphabetConnected extends React.Component {
     handleLetterClicked = (data, clickedLetter) => {
         const { setGameState, failsCounter, letterStatus } = this.props;
         setGameState({
@@ -54,7 +54,7 @@ const mapStateToProps = ({ gameState }) => ({
 
 const mapDispatchToProps = { setGameState };
 
-AlphabetPrimary.propTypes = {
+AlphabetConnected.propTypes = {
     gameID: PropTypes.number.isRequired,
     failsCounter: PropTypes.number.isRequired,
     setGameState: PropTypes.func.isRequired,
@@ -63,4 +63,4 @@ AlphabetPrimary.propTypes = {
     className: PropTypes.string,
 };
 
-export const Alphabet = connect(mapStateToProps, mapDispatchToProps)(AlphabetPrimary);
+export const Alphabet = connect(mapStateToProps, mapDispatchToProps)(AlphabetConnected);
