@@ -2,8 +2,10 @@
 
 exports[`<Letter /> Matches snapshot letter is correct 1`] = `
 <div
-  className="letter correctLetter"
+  className="letter"
   onClick={[Function]}
+  role="button"
+  tabIndex="0"
 >
   D
 </div>
@@ -11,8 +13,10 @@ exports[`<Letter /> Matches snapshot letter is correct 1`] = `
 
 exports[`<Letter /> Matches snapshot letter is incorrect 1`] = `
 <div
-  className="letter wrongLetter"
+  className="letter"
   onClick={[Function]}
+  role="button"
+  tabIndex="0"
 >
   D
 </div>
@@ -22,6 +26,8 @@ exports[`<Letter /> Matches snapshot letter is neither correct nor incorrect 1`]
 <div
   className="letter"
   onClick={[Function]}
+  role="button"
+  tabIndex="0"
 >
   D
 </div>
